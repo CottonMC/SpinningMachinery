@@ -31,7 +31,7 @@ public final class GrinderBlockEntity extends AbstractMachineBlockEntity
         implements Tickable, BlockEntityClientSerializable, SidedInventory, PropertyDelegateHolder, GrindingInventory {
     private static final String NBT_PROGRESS = "Progress";
     private static final String NBT_ACTIVE = "Active";
-    public static final int MAX_PROGRESS = 400;
+    private static final int MAX_PROGRESS = 1000;
     private static final int[] DEFAULT_SLOTS = { 0 };
     private static final int[] DOWN_SLOTS = { 1, 2 };
     private int progress = 0;
@@ -42,6 +42,8 @@ public final class GrinderBlockEntity extends AbstractMachineBlockEntity
             switch (i) {
                 case 0:
                     return progress;
+                case 1:
+                    return MAX_PROGRESS;
                 default:
                     return 0;
             }
@@ -52,12 +54,16 @@ public final class GrinderBlockEntity extends AbstractMachineBlockEntity
             switch (i) {
                 case 0:
                     progress = value;
+                    break;
+                case 1:
+                    // Ignore the max progress property
+                    break;
             }
         }
 
         @Override
         public int size() {
-            return 1;
+            return 2;
         }
     };
 
@@ -106,15 +112,17 @@ public final class GrinderBlockEntity extends AbstractMachineBlockEntity
     public void tick() {
         if (!world.isClient) {
             boolean oldActive = active;
+            int momentum = getNetworkMomentum(world, pos.up());
 
-            if (isSpinning(world, pos.up())) {
+            if (momentum > 0) {
                 active = true;
                 Recipe<GrindingInventory> recipe = world.getRecipeManager()
                         .getFirstMatch(SpinningRecipes.GRINDING, this, world)
                         .orElse(null);
 
                 if (recipe != null && !items.get(0).isEmpty()) {
-                    progress++;
+                    // TODO: Tweak this
+                    progress += momentum / 5;
 
                     if (progress >= MAX_PROGRESS) {
                         if (canAcceptRecipeOutput(recipe)) {
@@ -173,9 +181,9 @@ public final class GrinderBlockEntity extends AbstractMachineBlockEntity
         markDirty();
     }
 
-    private static boolean isSpinning(World world, BlockPos pos) {
+    private static int getNetworkMomentum(World world, BlockPos pos) {
         NetworkNode node = ((NetworkManagerProvider) world).getNetworkManager().getNetworks().getNodes().get(pos);
-        return node != null && node.getNetwork().getState().getMomentum() > 0;
+        return node != null ? node.getNetwork().getState().getMomentum() : 0;
     }
 
     @Override
