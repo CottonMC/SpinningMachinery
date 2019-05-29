@@ -25,15 +25,15 @@ public final class GrindingRecipe implements Recipe<GrindingInventory> {
     private final Ingredient input;
     private final ItemStack primaryOutput;
     @Nullable
-    private final ItemStack secondaryOutput;
-    private final float secondaryOutputChance;
+    private final ItemStack bonus;
+    private final float bonusChance;
 
     public GrindingRecipe(Identifier id, String group, Ingredient input, ItemStack primaryOutput,
-                          @Nullable ItemStack secondaryOutput, float secondaryOutputChance) {
+                          @Nullable ItemStack bonus, float bonusChance) {
         this.input = input;
         this.primaryOutput = primaryOutput;
-        this.secondaryOutput = secondaryOutput == null || secondaryOutput.isEmpty() ? null : secondaryOutput;
-        this.secondaryOutputChance = secondaryOutputChance;
+        this.bonus = bonus == null || bonus.isEmpty() ? null : bonus;
+        this.bonusChance = bonusChance;
         this.group = group;
         this.id = id;
     }
@@ -45,7 +45,7 @@ public final class GrindingRecipe implements Recipe<GrindingInventory> {
 
     @Override
     public ItemStack craft(GrindingInventory inventory) {
-        if (Math.random() < secondaryOutputChance) {
+        if (Math.random() < bonusChance) {
             inventory.insertSecondaryOutput(getSecondaryOutputOrEmpty().copy());
         }
 
@@ -83,7 +83,7 @@ public final class GrindingRecipe implements Recipe<GrindingInventory> {
     }
 
     private ItemStack getSecondaryOutputOrEmpty() {
-        return secondaryOutput != null ? secondaryOutput : ItemStack.EMPTY;
+        return bonus != null ? bonus : ItemStack.EMPTY;
     }
 
     public static final class Serializer implements RecipeSerializer<GrindingRecipe> {
@@ -98,9 +98,9 @@ public final class GrindingRecipe implements Recipe<GrindingInventory> {
                     id,
                     JsonHelper.getString(obj, "group", ""),
                     Ingredient.fromJson(ingredientJson),
-                    readItemStack(obj.get("primaryOutput")),
-                    obj.has("secondaryOutput") ? readItemStack(obj.get("secondaryOutput")) : null,
-                    JsonHelper.getFloat(obj, "secondaryOutputChance", 0f)
+                    readItemStack(obj.get("primary_output")),
+                    obj.has("bonus") ? readItemStack(obj.get("bonus")) : null,
+                    JsonHelper.getFloat(obj, "bonus_chance", 0f)
             );
         }
 
@@ -122,7 +122,7 @@ public final class GrindingRecipe implements Recipe<GrindingInventory> {
             recipe.input.write(buf);
             buf.writeItemStack(recipe.primaryOutput);
             buf.writeItemStack(recipe.getSecondaryOutputOrEmpty());
-            buf.writeFloat(recipe.secondaryOutputChance);
+            buf.writeFloat(recipe.bonusChance);
         }
 
         private static ItemStack readItemStack(JsonElement json) {
