@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "id": "spinning-machinery",
+  "version": "$version",
+
+  "name": "Spinning Machinery",
+  "description": "Drying laundry while powering machines",
+  "authors": ["The Cotton Project"],
+  "license": "MIT",
+
+  "entrypoints": {
+    "main": ["io.github.cottonmc.spinningmachinery.SpinningMachinery"]
+  },
+
+  "depends": {
+    "fabric": "*",
+    "cotton": "*",
+    "clothesline-fabric": "*"
+  }
+}
