@@ -4,9 +4,14 @@
   "version": "$version",
 
   "name": "Spinning Machinery",
-  "description": "Drying laundry while powering machines",
+  "description": "Drying laundry and powering machines",
   "authors": ["The Cotton Project"],
   "license": "MIT",
+  "contact": {
+    "homepage": "https://github.com/CottonMC/SpinningMachinery",
+    "sources": "https://github.com/CottonMC/SpinningMachinery",
+    "issues": "https://github.com/CottonMC/SpinningMachinery/issues"
+  },
 
   "entrypoints": {
     "main": ["io.github.cottonmc.spinningmachinery.SpinningMachinery"]
