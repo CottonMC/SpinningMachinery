@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "facing=north,active=false": { "model": "spinning-machinery:block/grinder" },
+    "facing=east,active=false": { "model": "spinning-machinery:block/grinder", "y": 90 },
+    "facing=south,active=false": { "model": "spinning-machinery:block/grinder", "y": 180 },
+    "facing=west,active=false": { "model": "spinning-machinery:block/grinder", "y": 270 },
+
+    "facing=north,active=true": { "model": "spinning-machinery:block/grinder_active" },
+    "facing=east,active=true": { "model": "spinning-machinery:block/grinder_active", "y": 90 },
+    "facing=south,active=true": { "model": "spinning-machinery:block/grinder_active", "y": 180 },
+    "facing=west,active=true": { "model": "spinning-machinery:block/grinder_active", "y": 270 }
+  }
+}

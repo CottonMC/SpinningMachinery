@@ -5,6 +5,7 @@ import io.github.cottonmc.spinningmachinery.gui.SpinningGuis;
 import io.github.cottonmc.spinningmachinery.util.FunctionUtils;
 import net.fabricmc.fabric.api.container.ContainerProviderRegistry;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;
 import net.minecraft.block.entity.BlockEntity;
@@ -62,5 +63,10 @@ public final class GrinderBlock extends BlockWithEntity {
         }
 
         return true;
+    }
+
+    @Override
+    public BlockRenderType getRenderType(BlockState state) {
+        return BlockRenderType.MODEL;
     }
 }
