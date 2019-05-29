@@ -7,6 +7,7 @@ import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable;
 import net.minecraft.container.Container;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
+import net.minecraft.inventory.SidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -14,11 +15,14 @@ import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.util.DefaultedList;
 import net.minecraft.util.Tickable;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
 
-public final class GrinderBlockEntity extends AbstractMachineBlockEntity implements Tickable, BlockEntityClientSerializable {
+public final class GrinderBlockEntity extends AbstractMachineBlockEntity implements Tickable, BlockEntityClientSerializable, SidedInventory {
     private static final String NBT_PROGRESS = "Progress";
     private static final int MAX_PROGRESS = 400;
+    private static final int[] DEFAULT_SLOTS = { 0 };
+    private static final int[] DOWN_SLOTS = { 1, 2 };
     private int progress = 0;
 
     public GrinderBlockEntity() {
@@ -68,5 +72,23 @@ public final class GrinderBlockEntity extends AbstractMachineBlockEntity impleme
     private static boolean isSpinning(World world, BlockPos pos) {
         NetworkNode node = ((NetworkManagerProvider) world).getNetworkManager().getNetworks().getNodes().get(pos);
         return node != null && node.getNetwork().getState().getMomentum() > 0;
+    }
+
+    @Override
+    public int[] getInvAvailableSlots(Direction direction) {
+        if (direction == Direction.DOWN)
+            return DOWN_SLOTS;
+        else
+            return DEFAULT_SLOTS;
+    }
+
+    @Override
+    public boolean canInsertInvStack(int i, ItemStack stack, Direction direction) {
+        return direction != Direction.DOWN && i == 0;
+    }
+
+    @Override
+    public boolean canExtractInvStack(int i, ItemStack stack, Direction direction) {
+        return i != 0;
     }
 }

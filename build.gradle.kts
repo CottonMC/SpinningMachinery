@@ -87,4 +87,7 @@ dependencies {
     modApi("com.jamieswhiteshirt:clothesline-fabric:0.0.16", excludeOldFabric)
     includedMod("io.github.cottonmc:cotton:" + v("cotton"), excludeOldFabric)
     modRuntime("com.jamieswhiteshirt:developer-mode:1.0.11")
+
+    // Other libraries
+    compileOnly("com.google.code.findbugs:jsr305:3.0.2") { isTransitive = false }
 }
