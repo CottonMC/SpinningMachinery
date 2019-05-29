@@ -13,7 +13,7 @@ import net.minecraft.util.registry.Registry;
 public final class SpinningBlocks {
     public static final Block GRINDER = register(
             "grinder",
-            new GrinderBlock(Block.Settings.copy(Blocks.FURNACE)),
+            new GrinderBlock(Block.Settings.copy(Blocks.ANVIL)),
             new Item.Settings().itemGroup(SpinningMachinery.ITEM_GROUP)
     );
 

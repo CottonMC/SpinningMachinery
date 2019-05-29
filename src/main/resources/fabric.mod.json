@@ -14,7 +14,8 @@
   },
 
   "entrypoints": {
-    "main": ["io.github.cottonmc.spinningmachinery.SpinningMachinery"]
+    "main": ["io.github.cottonmc.spinningmachinery.SpinningMachinery"],
+    "client": ["io.github.cottonmc.spinningmachinery.SpinningMachinery::initClient"]
   },
 
   "depends": {
