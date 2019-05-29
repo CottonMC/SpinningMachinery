@@ -1,12 +1,10 @@
 package io.github.cottonmc.spinningmachinery.block;
 
-import com.mojang.datafixers.DataFixUtils;
 import io.github.cottonmc.spinningmachinery.util.FunctionUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.BlockWithEntity;
 import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.state.StateFactory;
 import net.minecraft.state.property.BooleanProperty;
@@ -17,10 +15,6 @@ import net.minecraft.world.BlockView;
 public final class GrinderBlock extends BlockWithEntity {
     public static final DirectionProperty FACING = Properties.FACING_HORIZONTAL;
     public static final BooleanProperty ACTIVE = BooleanProperty.create("active");
-
-    public static final BlockEntityType<?> BLOCK_ENTITY_TYPE = DataFixUtils.make(() -> {
-        throw new UnsupportedOperationException();
-    });
 
     public GrinderBlock(Settings settings) {
         super(settings);
@@ -43,6 +37,6 @@ public final class GrinderBlock extends BlockWithEntity {
 
     @Override
     public BlockEntity createBlockEntity(BlockView blockView) {
-        return BLOCK_ENTITY_TYPE.instantiate();
+        return SpinningBlocks.GRINDER_BLOCK_ENTITY.instantiate();
     }
 }
