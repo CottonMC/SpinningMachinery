@@ -43,7 +43,7 @@ public abstract class AbstractMachineBlockEntity extends LockableContainerBlockE
 
     @Override
     public void setInvStack(int i, ItemStack stack) {
-        // TODO: Furnaces seem to do progress resetting here
+        validateProgress(i, stack);
         items.set(i, stack);
     }
 
@@ -67,5 +67,9 @@ public abstract class AbstractMachineBlockEntity extends LockableContainerBlockE
     public CompoundTag toTag(CompoundTag tag) {
         Inventories.toTag(tag, items);
         return super.toTag(tag);
+    }
+
+    protected void validateProgress(int slot, ItemStack stack) {
+
     }
 }

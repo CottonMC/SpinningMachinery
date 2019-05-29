@@ -5,7 +5,6 @@ import com.google.gson.JsonObject;
 import com.mojang.datafixers.Dynamic;
 import com.mojang.datafixers.types.JsonOps;
 import net.minecraft.datafixers.NbtOps;
-import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.recipe.Ingredient;
@@ -20,7 +19,7 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
-public final class GrindingRecipe implements Recipe<Inventory> {
+public final class GrindingRecipe implements Recipe<GrindingInventory> {
     private final Identifier id;
     private final String group;
     private final Ingredient input;
@@ -40,12 +39,16 @@ public final class GrindingRecipe implements Recipe<Inventory> {
     }
 
     @Override
-    public boolean matches(Inventory inventory, World world) {
+    public boolean matches(GrindingInventory inventory, World world) {
         return input.test(inventory.getInvStack(0));
     }
 
     @Override
-    public ItemStack craft(Inventory inventory) {
+    public ItemStack craft(GrindingInventory inventory) {
+        if (Math.random() < secondaryOutputChance) {
+            inventory.insertSecondaryOutput(getSecondaryOutputOrEmpty().copy());
+        }
+
         return primaryOutput.copy();
     }
 
@@ -79,25 +82,8 @@ public final class GrindingRecipe implements Recipe<Inventory> {
         return group;
     }
 
-    public Ingredient getInput() {
-        return input;
-    }
-
-    public ItemStack getPrimaryOutput() {
-        return primaryOutput;
-    }
-
-    @Nullable
-    public ItemStack getSecondaryOutput() {
-        return secondaryOutput;
-    }
-
     private ItemStack getSecondaryOutputOrEmpty() {
         return secondaryOutput != null ? secondaryOutput : ItemStack.EMPTY;
-    }
-
-    public float getSecondaryOutputChance() {
-        return secondaryOutputChance;
     }
 
     public static final class Serializer implements RecipeSerializer<GrindingRecipe> {
