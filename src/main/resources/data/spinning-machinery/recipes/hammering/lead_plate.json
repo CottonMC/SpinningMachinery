@@ -1,0 +1,8 @@
+{
+  "type": "spinning-machinery:hammering",
+  "input": "c:lead_block",
+  "output": {
+    "id": "c:lead_plate",
+    "Count": 4
+  }
+}

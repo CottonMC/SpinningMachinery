@@ -12,9 +12,9 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Collections;
 import java.util.List;
 
-final class PlateRecipe extends AbstractContentGenerator {
-    PlateRecipe() {
-        super("recipe.spinning-machinery.plate", "recipes/pressing", SpinningJsonPlugin.INFO, "json", ResourceRoot.Data);
+final class PlateHammeringRecipe extends AbstractContentGenerator {
+    PlateHammeringRecipe() {
+        super("recipe.spinning-machinery.plate_hammering", "recipes/hammering", SpinningJsonPlugin.INFO, "json", ResourceRoot.Data);
     }
 
     @NotNull
@@ -22,9 +22,12 @@ final class PlateRecipe extends AbstractContentGenerator {
     public List<Output> generate(Identifier identifier) {
         return Collections.singletonList(WrappedOutputKt.suffixed(
                 new MapJsonOutput(ImmutableMap.of(
-                        "type", "spinning-machinery:pressing",
-                        "input", ImmutableMap.of("item", new Identifier("c", identifier.getPath() + "_ingot")),
-                        "output", new Identifier("c", identifier.getPath() + "_plate")
+                        "type", "spinning-machinery:hammering",
+                        "input", new Identifier("c", identifier.getPath() + "_block"),
+                        "output", ImmutableMap.of(
+                                "id", new Identifier("c", identifier.getPath() + "_plate"),
+                                "Count", 4
+                        )
                 )),
                 "plate"
         ));

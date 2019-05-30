@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " .I",
+    " /.",
+    "D  "
+  ],
+  "key": {
+    "I": { "item": "minecraft:iron_ingot" },
+    "/": { "item": "minecraft:stick" },
+    ".": { "item": "minecraft:iron_nugget" },
+    "D": { "item": "minecraft:black_dye" }
+  },
+  "result": {
+    "item": "spinning-machinery:hammer"
+  }
+}

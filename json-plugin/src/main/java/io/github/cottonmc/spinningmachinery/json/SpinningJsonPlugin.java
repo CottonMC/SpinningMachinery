@@ -34,7 +34,10 @@ public final class SpinningJsonPlugin implements Plugin {
     @NotNull
     @Override
     public List<ContentGenerator> getGenerators() {
-        return ImmutableList.of(new PlateRecipe());
+        return ImmutableList.of(
+                new PlatePressingRecipe(),
+                new PlateHammeringRecipe()
+        );
     }
 
     @Override

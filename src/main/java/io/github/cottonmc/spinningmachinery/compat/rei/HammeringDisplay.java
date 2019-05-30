@@ -1,6 +1,7 @@
 package io.github.cottonmc.spinningmachinery.compat.rei;
 
 import com.google.common.collect.ImmutableList;
+import io.github.cottonmc.spinningmachinery.item.SpinningItems;
 import io.github.cottonmc.spinningmachinery.recipe.HammeringRecipe;
 import me.shedaniel.rei.api.RecipeDisplay;
 import net.minecraft.item.ItemStack;
@@ -18,9 +19,15 @@ final class HammeringDisplay implements RecipeDisplay<HammeringRecipe> {
 
     HammeringDisplay(HammeringRecipe recipe) {
         this.recipe = recipe;
-        input = recipe.getPreviewInputs().stream()
-                .map(ingredient -> Arrays.asList(ingredient.getStackArray()))
-                .collect(Collectors.toList());
+        input = ImmutableList.<List<ItemStack>>builder()
+                .addAll(
+                        recipe.getPreviewInputs().stream()
+                                .map(ingredient -> Arrays.asList(ingredient.getStackArray()))
+                                .collect(Collectors.toList())
+                )
+                .add(ImmutableList.of(new ItemStack(SpinningItems.HAMMER)))
+                .build();
+
 
         output = ImmutableList.of(recipe.getOutput());
     }

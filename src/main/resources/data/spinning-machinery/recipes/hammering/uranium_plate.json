@@ -1,0 +1,8 @@
+{
+  "type": "spinning-machinery:hammering",
+  "input": "c:uranium_block",
+  "output": {
+    "id": "c:uranium_plate",
+    "Count": 4
+  }
+}

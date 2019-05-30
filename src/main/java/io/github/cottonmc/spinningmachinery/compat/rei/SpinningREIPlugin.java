@@ -35,7 +35,7 @@ public final class SpinningREIPlugin implements REIPluginEntry {
             } else if (recipe instanceof PressingRecipe) {
                 recipeHelper.registerDisplay(PRESSING, new PressingDisplay((PressingRecipe) recipe));
             } else if (recipe instanceof HammeringRecipe) {
-                recipeHelper.registerDisplay(PRESSING, new HammeringDisplay((HammeringRecipe) recipe));
+                recipeHelper.registerDisplay(HAMMERING, new HammeringDisplay((HammeringRecipe) recipe));
             }
         }
     }

@@ -1,0 +1,8 @@
+{
+  "type": "spinning-machinery:hammering",
+  "input": "minecraft:gold_block",
+  "output": {
+    "id": "c:gold_plate",
+    "Count": 4
+  }
+}

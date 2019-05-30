@@ -1,0 +1,8 @@
+{
+  "type": "spinning-machinery:hammering",
+  "input": "c:cobalt_block",
+  "output": {
+    "id": "c:cobalt_plate",
+    "Count": 4
+  }
+}
