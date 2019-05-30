@@ -127,4 +127,9 @@ public final class PlatePressBlockEntity extends AbstractProcessorBlockEntity<In
     public PropertyDelegate getPropertyDelegate() {
         return propertyDelegate;
     }
+
+    @Override
+    public boolean isValidInvStack(int slot, ItemStack stack) {
+        return slot == 0;
+    }
 }

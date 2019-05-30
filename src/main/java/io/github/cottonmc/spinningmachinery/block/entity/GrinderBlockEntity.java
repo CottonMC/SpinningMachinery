@@ -137,4 +137,9 @@ public final class GrinderBlockEntity extends AbstractProcessorBlockEntity<Grind
             ItemScatterer.spawn(world, pos.up(), DefaultedList.create(ItemStack.EMPTY, stack));
         }
     }
+
+    @Override
+    public boolean isValidInvStack(int slot, ItemStack stack) {
+        return slot == 0;
+    }
 }

@@ -1,0 +1,6 @@
+{
+  "parent": "spinning-machinery:block/plate_press",
+  "textures": {
+    "front": "spinning-machinery:block/plate_press_active"
+  }
+}
