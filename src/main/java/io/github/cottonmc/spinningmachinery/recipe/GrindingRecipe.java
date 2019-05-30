@@ -32,6 +32,10 @@ public final class GrindingRecipe implements Recipe<GrindingInventory> {
 
     public GrindingRecipe(Identifier id, String group, Ingredient input, ItemStack primaryOutput,
                           @Nullable ItemStack bonus, float bonusChance) {
+        if (bonusChance < 0f || bonusChance > 1f) {
+            throw new IllegalArgumentException("bonusChance must be between 0.0 and 1.0");
+        }
+
         this.input = input;
         this.primaryOutput = primaryOutput;
         this.bonus = bonus == null || bonus.isEmpty() ? null : bonus;

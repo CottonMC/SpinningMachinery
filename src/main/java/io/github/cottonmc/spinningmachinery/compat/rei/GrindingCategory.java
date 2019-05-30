@@ -56,7 +56,12 @@ final class GrindingCategory implements RecipeCategory<GrindingDisplay> {
                 new SMSlotWidget(x + 18, y, display.getInput().get(0), true, true),
                 SMSlotWidget.createBig(x + 5 * 18, y, Collections.singletonList(display.getOutput().get(0)), true, true),
                 new SMSlotWidget(x + 6 * 18 + 10, y, bonusStacks, true, true),
-                new LabelWidget(x + 7 * 18, y + 18, I18n.translate("gui.spinning-machinery.grinding.bonus_chance_format", bonusChance))
+                new LabelWidget(
+                        x + 7 * 18, y + 18,
+                        bonusChance != 0
+                                ? I18n.translate("gui.spinning-machinery.grinding.bonus_chance_format", bonusChance)
+                                : ""
+                )
         );
     }
 }

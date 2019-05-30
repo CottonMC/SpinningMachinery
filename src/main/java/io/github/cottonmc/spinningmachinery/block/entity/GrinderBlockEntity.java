@@ -100,11 +100,13 @@ public final class GrinderBlockEntity extends AbstractMachineBlockEntity
     @Override
     public void fromClientTag(CompoundTag tag) {
         progress = tag.getInt(NBT_PROGRESS);
+        Inventories.fromTag(tag, items);
     }
 
     @Override
     public CompoundTag toClientTag(CompoundTag tag) {
         tag.putInt(NBT_PROGRESS, progress);
+        Inventories.toTag(tag, items);
         return tag;
     }
 
@@ -114,7 +116,7 @@ public final class GrinderBlockEntity extends AbstractMachineBlockEntity
             boolean oldActive = active;
             int momentum = getNetworkMomentum(world, pos.up());
 
-            if (momentum > 0) {
+            if (momentum != 0) {
                 active = true;
                 Recipe<GrindingInventory> recipe = world.getRecipeManager()
                         .getFirstMatch(SpinningRecipes.GRINDING, this, world)
@@ -122,7 +124,7 @@ public final class GrinderBlockEntity extends AbstractMachineBlockEntity
 
                 if (recipe != null && !items.get(0).isEmpty()) {
                     // TODO: Tweak this
-                    progress += momentum / 5;
+                    progress += Math.abs(momentum) / 5;
 
                     if (progress >= MAX_PROGRESS) {
                         if (canAcceptRecipeOutput(recipe)) {

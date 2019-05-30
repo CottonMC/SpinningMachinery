@@ -3,6 +3,8 @@ package io.github.cottonmc.spinningmachinery.block;
 import com.google.common.collect.ImmutableSet;
 import io.github.cottonmc.spinningmachinery.SpinningMachinery;
 import io.github.cottonmc.spinningmachinery.block.entity.GrinderBlockEntity;
+import net.fabricmc.fabric.api.block.FabricBlockSettings;
+import net.fabricmc.fabric.api.tools.FabricToolTags;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntityType;
@@ -13,7 +15,12 @@ import net.minecraft.util.registry.Registry;
 public final class SpinningBlocks {
     public static final Block GRINDER = register(
             "grinder",
-            new GrinderBlock(Block.Settings.copy(Blocks.ANVIL)),
+            new GrinderBlock(
+                    FabricBlockSettings.copy(Blocks.IRON_BLOCK)
+                            .breakByTool(FabricToolTags.PICKAXES)
+                            .ticksRandomly()
+                            .build()
+            ),
             new Item.Settings().itemGroup(SpinningMachinery.ITEM_GROUP)
     );
 
