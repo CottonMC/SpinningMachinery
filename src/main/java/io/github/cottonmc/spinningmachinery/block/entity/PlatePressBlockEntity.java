@@ -3,8 +3,7 @@ package io.github.cottonmc.spinningmachinery.block.entity;
 import io.github.cottonmc.cotton.gui.PropertyDelegateHolder;
 import io.github.cottonmc.spinningmachinery.block.AbstractMachineBlock;
 import io.github.cottonmc.spinningmachinery.block.SpinningBlocks;
-import io.github.cottonmc.spinningmachinery.gui.controller.GrinderController;
-import io.github.cottonmc.spinningmachinery.recipe.GrindingInventory;
+import io.github.cottonmc.spinningmachinery.gui.controller.PlatePressController;
 import io.github.cottonmc.spinningmachinery.recipe.SpinningRecipes;
 import net.fabricmc.fabric.api.block.entity.BlockEntityClientSerializable;
 import net.minecraft.container.BlockContext;
@@ -12,20 +11,20 @@ import net.minecraft.container.Container;
 import net.minecraft.container.PropertyDelegate;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventories;
+import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.SidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.util.DefaultedList;
-import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.math.Direction;
 
-public final class GrinderBlockEntity extends AbstractProcessorBlockEntity<GrindingInventory>
-        implements BlockEntityClientSerializable, SidedInventory, PropertyDelegateHolder, GrindingInventory {
+public final class PlatePressBlockEntity extends AbstractProcessorBlockEntity<Inventory>
+        implements BlockEntityClientSerializable, SidedInventory, PropertyDelegateHolder {
     public static final int MAX_PROGRESS = 1000;
     private static final int[] DEFAULT_SLOTS = { 0 };
-    private static final int[] DOWN_SLOTS = { 1, 2 };
+    private static final int[] DOWN_SLOTS = { 1 };
     private final PropertyDelegate propertyDelegate = new PropertyDelegate() {
         @Override
         public int get(int i) {
@@ -57,18 +56,18 @@ public final class GrinderBlockEntity extends AbstractProcessorBlockEntity<Grind
         }
     };
 
-    public GrinderBlockEntity() {
-        super(SpinningBlocks.GRINDER_BLOCK_ENTITY, DefaultedList.create(3, ItemStack.EMPTY), SpinningRecipes.GRINDING);
+    public PlatePressBlockEntity() {
+        super(SpinningBlocks.PLATE_PRESS_BLOCK_ENTITY, DefaultedList.create(3, ItemStack.EMPTY), SpinningRecipes.PRESSING);
     }
 
     @Override
     protected Component getContainerName() {
-        return new TranslatableComponent(SpinningBlocks.GRINDER.getTranslationKey());
+        return new TranslatableComponent(SpinningBlocks.PLATE_PRESS.getTranslationKey());
     }
 
     @Override
     protected Container createContainer(int syncId, PlayerInventory playerInventory) {
-        return new GrinderController(syncId, playerInventory, BlockContext.create(world, pos), getDisplayName());
+        return new PlatePressController(syncId, playerInventory, BlockContext.create(world, pos), getDisplayName());
     }
 
     @Override
@@ -127,14 +126,5 @@ public final class GrinderBlockEntity extends AbstractProcessorBlockEntity<Grind
     @Override
     public PropertyDelegate getPropertyDelegate() {
         return propertyDelegate;
-    }
-
-    @Override
-    public void insertProcessingBonus(ItemStack stack) {
-        if (canInsertIntoSlot(2, stack)) {
-            insertIntoSlot(2, stack);
-        } else {
-            ItemScatterer.spawn(world, pos.up(), DefaultedList.create(ItemStack.EMPTY, stack));
-        }
     }
 }

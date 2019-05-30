@@ -2,9 +2,11 @@ package io.github.cottonmc.spinningmachinery.recipe;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
 import com.mojang.datafixers.Dynamic;
 import com.mojang.datafixers.types.JsonOps;
 import net.minecraft.datafixers.NbtOps;
+import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.recipe.Ingredient;
@@ -18,44 +20,27 @@ import net.minecraft.util.PacketByteBuf;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 
-import javax.annotation.Nullable;
-import java.util.Optional;
-
-public final class GrindingRecipe implements Recipe<GrindingInventory> {
+public final class PressingRecipe implements Recipe<Inventory> {
     private final Identifier id;
     private final String group;
     private final Ingredient input;
-    private final ItemStack primaryOutput;
-    @Nullable
-    private final ItemStack bonus;
-    private final float bonusChance;
+    private final ItemStack output;
 
-    public GrindingRecipe(Identifier id, String group, Ingredient input, ItemStack primaryOutput,
-                          @Nullable ItemStack bonus, float bonusChance) {
-        if (bonusChance < 0f || bonusChance > 1f) {
-            throw new IllegalArgumentException("bonusChance must be between 0.0 and 1.0");
-        }
-
+    public PressingRecipe(Identifier id, String group, Ingredient input, ItemStack output) {
         this.input = input;
-        this.primaryOutput = primaryOutput;
-        this.bonus = bonus == null || bonus.isEmpty() ? null : bonus;
-        this.bonusChance = bonusChance;
+        this.output = output;
         this.group = group;
         this.id = id;
     }
 
     @Override
-    public boolean matches(GrindingInventory inventory, World world) {
+    public boolean matches(Inventory inventory, World world) {
         return input.test(inventory.getInvStack(0));
     }
 
     @Override
-    public ItemStack craft(GrindingInventory inventory) {
-        if (Math.random() < bonusChance) {
-            inventory.insertProcessingBonus(getBonusOrEmpty().copy());
-        }
-
-        return primaryOutput.copy();
+    public ItemStack craft(Inventory inventory) {
+        return output.copy();
     }
 
     @Override
@@ -65,12 +50,12 @@ public final class GrindingRecipe implements Recipe<GrindingInventory> {
 
     @Override
     public ItemStack getOutput() {
-        return primaryOutput;
+        return output;
     }
 
     @Override
     public RecipeType<?> getType() {
-        return SpinningRecipes.GRINDING;
+        return SpinningRecipes.PRESSING;
     }
 
     @Override
@@ -80,24 +65,12 @@ public final class GrindingRecipe implements Recipe<GrindingInventory> {
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return SpinningRecipes.GRINDING_SERIALIZER;
+        return SpinningRecipes.PRESSING_SERIALIZER;
     }
 
     @Override
     public String getGroup() {
         return group;
-    }
-
-    public Optional<ItemStack> getBonus() {
-        return Optional.ofNullable(bonus);
-    }
-
-    private ItemStack getBonusOrEmpty() {
-        return bonus != null ? bonus : ItemStack.EMPTY;
-    }
-
-    public double getBonusChance() {
-        return bonusChance;
     }
 
     @Override
@@ -107,43 +80,37 @@ public final class GrindingRecipe implements Recipe<GrindingInventory> {
         return list;
     }
 
-    public static final class Serializer implements RecipeSerializer<GrindingRecipe> {
+    public static final class Serializer implements RecipeSerializer<PressingRecipe> {
         @Override
-        public GrindingRecipe read(Identifier id, JsonObject obj) {
+        public PressingRecipe read(Identifier id, JsonObject obj) {
             JsonElement ingredientJson =
                     JsonHelper.hasArray(obj, "input")
                             ? JsonHelper.getArray(obj, "input")
                             : JsonHelper.getObject(obj, "input");
 
-            return new GrindingRecipe(
+            return new PressingRecipe(
                     id,
                     JsonHelper.getString(obj, "group", ""),
                     Ingredient.fromJson(ingredientJson),
-                    readItemStack(obj.get("primary_output")),
-                    obj.has("bonus") ? readItemStack(obj.get("bonus")) : null,
-                    JsonHelper.getFloat(obj, "bonus_chance", 0f)
+                    readItemStack(obj.get("output"))
             );
         }
 
         @Override
-        public GrindingRecipe read(Identifier id, PacketByteBuf buf) {
-            return new GrindingRecipe(
+        public PressingRecipe read(Identifier id, PacketByteBuf buf) {
+            return new PressingRecipe(
                     id,
                     buf.readString(32767),
                     Ingredient.fromPacket(buf),
-                    buf.readItemStack(),
-                    buf.readItemStack(),
-                    buf.readFloat()
+                    buf.readItemStack()
             );
         }
 
         @Override
-        public void write(PacketByteBuf buf, GrindingRecipe recipe) {
+        public void write(PacketByteBuf buf, PressingRecipe recipe) {
             buf.writeString(recipe.group);
             recipe.input.write(buf);
-            buf.writeItemStack(recipe.primaryOutput);
-            buf.writeItemStack(recipe.getBonusOrEmpty());
-            buf.writeFloat(recipe.bonusChance);
+            buf.writeItemStack(recipe.output);
         }
 
         private static ItemStack readItemStack(JsonElement json) {
@@ -154,7 +121,7 @@ public final class GrindingRecipe implements Recipe<GrindingInventory> {
                         ).orElseThrow(() -> new IllegalStateException("Item " + json.getAsString() + " does not exist"))
                 );
             else if (!json.isJsonObject())
-                throw new IllegalArgumentException("Invalid json input type for an item stack; must be a string or an object");
+                throw new JsonParseException("Invalid json input type for an item stack; must be a string or an object");
             else
                 return ItemStack.fromTag((CompoundTag) Dynamic.convert(JsonOps.INSTANCE, NbtOps.INSTANCE, json));
         }

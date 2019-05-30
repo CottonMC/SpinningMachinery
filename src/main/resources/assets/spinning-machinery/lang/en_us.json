@@ -1,8 +1,10 @@
 {
   "block.spinning-machinery.grinder": "Grinder",
+  "block.spinning-machinery.plate_press": "Plate Press",
 
   "gui.spinning-machinery.grinding.category": "Grinding",
   "gui.spinning-machinery.grinding.bonus_chance_format": "%d%%",
+  "gui.spinning-machinery.pressing.category": "Pressing",
 
   "item.spinning-machinery.machine_casing": "Machine Casing"
 }

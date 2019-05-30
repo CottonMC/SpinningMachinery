@@ -7,8 +7,8 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Nameable;
 
-public abstract class BaseMachineScreen<C extends CottonScreenController & Nameable> extends CottonScreen<C> {
-    public BaseMachineScreen(C menu, PlayerEntity player) {
+public class MachineScreen<C extends CottonScreenController & Nameable> extends CottonScreen<C> {
+    public MachineScreen(C menu, PlayerEntity player) {
         super(menu, player);
     }
 

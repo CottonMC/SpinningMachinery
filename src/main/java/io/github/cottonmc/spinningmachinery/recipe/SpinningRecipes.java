@@ -14,8 +14,19 @@ public final class SpinningRecipes {
                 }
             });
 
+    public static final RecipeType<PressingRecipe> PRESSING =
+            Registry.register(Registry.RECIPE_TYPE, SpinningMachinery.id("pressing"), new RecipeType<PressingRecipe>() {
+                @Override
+                public String toString() {
+                    return "pressing";
+                }
+            });
+
     public static final RecipeSerializer<GrindingRecipe> GRINDING_SERIALIZER =
             Registry.register(Registry.RECIPE_SERIALIZER, SpinningMachinery.id("grinding"), new GrindingRecipe.Serializer());
+
+    public static final RecipeSerializer<PressingRecipe> PRESSING_SERIALIZER =
+            Registry.register(Registry.RECIPE_SERIALIZER, SpinningMachinery.id("pressing"), new PressingRecipe.Serializer());
 
     public static void init() {}
 }

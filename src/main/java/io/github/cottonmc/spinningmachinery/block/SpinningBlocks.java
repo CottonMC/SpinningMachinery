@@ -3,6 +3,7 @@ package io.github.cottonmc.spinningmachinery.block;
 import com.google.common.collect.ImmutableSet;
 import io.github.cottonmc.spinningmachinery.SpinningMachinery;
 import io.github.cottonmc.spinningmachinery.block.entity.GrinderBlockEntity;
+import io.github.cottonmc.spinningmachinery.block.entity.PlatePressBlockEntity;
 import net.fabricmc.fabric.api.block.FabricBlockSettings;
 import net.fabricmc.fabric.api.tools.FabricToolTags;
 import net.minecraft.block.Block;
@@ -40,6 +41,12 @@ public final class SpinningBlocks {
             Registry.BLOCK_ENTITY,
             "grinder",
             new BlockEntityType<>(GrinderBlockEntity::new, ImmutableSet.of(GRINDER), null)
+    );
+
+    public static final BlockEntityType<PlatePressBlockEntity> PLATE_PRESS_BLOCK_ENTITY = register(
+            Registry.BLOCK_ENTITY,
+            "plate_press",
+            new BlockEntityType<>(PlatePressBlockEntity::new, ImmutableSet.of(PLATE_PRESS), null)
     );
 
     public static void init() {}
