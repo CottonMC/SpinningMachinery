@@ -1,7 +1,8 @@
 {
-  "parent": "minecraft:block/cube_top",
+  "parent": "minecraft:block/cube_bottom_top",
   "textures": {
-    "side": "spinning-machinery:block/machine_casing",
-    "top": "spinning-machinery:block/machine_casing_top"
+    "side": "spinning-machinery:block/machine_casing_side",
+    "top": "spinning-machinery:block/machine_casing_top",
+    "bottom": "spinning-machinery:block/machine_casing_bottom"
   }
 }
