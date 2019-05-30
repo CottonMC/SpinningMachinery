@@ -21,7 +21,7 @@ import net.minecraft.world.World;
 import javax.annotation.Nullable;
 import java.util.Optional;
 
-public final class GrindingRecipe implements Recipe<GrindingInventory> {
+public final class GrindingRecipe implements Recipe<ProcessingInventory> {
     private final Identifier id;
     private final String group;
     private final Ingredient input;
@@ -45,12 +45,12 @@ public final class GrindingRecipe implements Recipe<GrindingInventory> {
     }
 
     @Override
-    public boolean matches(GrindingInventory inventory, World world) {
+    public boolean matches(ProcessingInventory inventory, World world) {
         return input.test(inventory.getInvStack(0));
     }
 
     @Override
-    public ItemStack craft(GrindingInventory inventory) {
+    public ItemStack craft(ProcessingInventory inventory) {
         if (Math.random() < bonusChance) {
             inventory.insertProcessingBonus(getBonusOrEmpty().copy());
         }

@@ -9,8 +9,9 @@ import io.github.cottonmc.spinningmachinery.recipe.SpinningRecipes;
 import net.minecraft.container.BlockContext;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.network.chat.Component;
+import net.minecraft.util.Nameable;
 
-public final class GrinderController extends CottonScreenController {
+public final class GrinderController extends CottonScreenController implements Nameable {
     private final Component title;
 
     public GrinderController(int syncId, PlayerInventory playerInventory, BlockContext context, Component title) {
@@ -36,7 +37,8 @@ public final class GrinderController extends CottonScreenController {
         return 1;
     }
 
-    public Component getTitle() {
+    @Override
+    public Component getName() {
         return title;
     }
 
