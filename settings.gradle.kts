@@ -9,3 +9,4 @@ pluginManagement {
 }
 
 rootProject.name = "spinning-machinery"
+include("json-plugin")

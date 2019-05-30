@@ -19,22 +19,24 @@ if (localBuild) {
     println("Note: local build mode enabled in gradle.properties; all dependencies might not work!")
 }
 
-repositories {
-    mavenCentral()
-    if (localBuild) {
-        mavenLocal()
-    }
+allprojects {
+    repositories {
+        mavenCentral()
+        if (localBuild) {
+            mavenLocal()
+        }
 
-    // For cotton
-    maven(url = "http://server.bbkr.space:8081/artifactory/libs-release")
-    maven(url = "http://server.bbkr.space:8081/artifactory/libs-snapshot")
+        // For cotton
+        maven(url = "http://server.bbkr.space:8081/artifactory/libs-release")
+        maven(url = "http://server.bbkr.space:8081/artifactory/libs-snapshot")
 
-    // For clothesline and developer-mode
-    maven(url = "https://maven.jamieswhiteshirt.com/libs-release/")
+        // For clothesline and developer-mode
+        maven(url = "https://maven.jamieswhiteshirt.com/libs-release/")
 
-    // For REI's deps
-    maven(url = "https://minecraft.curseforge.com/api/maven") {
-        name = "CurseForge"
+        // For REI's deps
+        maven(url = "https://minecraft.curseforge.com/api/maven") {
+            name = "CurseForge"
+        }
     }
 }
 

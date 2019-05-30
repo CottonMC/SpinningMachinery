@@ -1,0 +1,7 @@
+{
+  "type": "spinning-machinery:pressing",
+  "input": {
+    "item": "c:lead_ingot"
+  },
+  "output": "c:lead_plate"
+}

@@ -10,6 +10,8 @@ import net.fabricmc.api.ModInitializer;
 import net.minecraft.util.Identifier;
 
 public final class SpinningMachinery implements ModInitializer {
+    public static final String NAMESPACE = "spinning-machinery";
+
     @Override
     public void onInitialize() {
         SpinningBlocks.init();
@@ -24,6 +26,6 @@ public final class SpinningMachinery implements ModInitializer {
     }
 
     public static Identifier id(String path) {
-        return new Identifier("spinning-machinery", path);
+        return new Identifier(NAMESPACE, path);
     }
 }

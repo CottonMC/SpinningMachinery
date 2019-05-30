@@ -1,0 +1,7 @@
+{
+  "type": "spinning-machinery:pressing",
+  "input": {
+    "item": "c:platinum_ingot"
+  },
+  "output": "c:platinum_plate"
+}

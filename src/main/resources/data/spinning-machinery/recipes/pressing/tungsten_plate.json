@@ -1,0 +1,7 @@
+{
+  "type": "spinning-machinery:pressing",
+  "input": {
+    "item": "c:tungsten_ingot"
+  },
+  "output": "c:tungsten_plate"
+}

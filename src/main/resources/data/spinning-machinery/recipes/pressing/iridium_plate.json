@@ -1,0 +1,7 @@
+{
+  "type": "spinning-machinery:pressing",
+  "input": {
+    "item": "c:iridium_ingot"
+  },
+  "output": "c:iridium_plate"
+}

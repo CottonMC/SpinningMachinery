@@ -1,0 +1,7 @@
+{
+  "type": "spinning-machinery:pressing",
+  "input": {
+    "item": "c:brass_ingot"
+  },
+  "output": "c:brass_plate"
+}

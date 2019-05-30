@@ -1,0 +1,7 @@
+{
+  "type": "spinning-machinery:pressing",
+  "input": {
+    "item": "c:thorium_ingot"
+  },
+  "output": "c:thorium_plate"
+}
