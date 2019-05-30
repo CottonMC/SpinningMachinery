@@ -1,0 +1,8 @@
+{
+  "type": "spinning-machinery:hammering",
+  "input": "minecraft:iron_block",
+  "output": {
+    "id": "c:iron_plate",
+    "Count": 4
+  }
+}

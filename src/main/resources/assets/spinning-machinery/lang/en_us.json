@@ -5,6 +5,8 @@
   "gui.spinning-machinery.grinding.category": "Grinding",
   "gui.spinning-machinery.grinding.bonus_chance_format": "%d%%",
   "gui.spinning-machinery.pressing.category": "Pressing",
+  "gui.spinning-machinery.hammering.category": "Hammering",
 
+  "item.spinning-machinery.hammer": "Hammer",
   "item.spinning-machinery.machine_casing": "Machine Casing"
 }

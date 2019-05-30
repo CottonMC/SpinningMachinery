@@ -7,6 +7,7 @@ import net.minecraft.util.registry.Registry;
 
 public final class SpinningItems {
     public static final Item MACHINE_CASING = register("machine_casing", new Item(new Item.Settings().itemGroup(ItemGroup.MISC)));
+    public static final Item HAMMER = register("hammer", new HammerItem(new Item.Settings().itemGroup(ItemGroup.TOOLS).durability(80)));
 
     public static void init() {}
 
