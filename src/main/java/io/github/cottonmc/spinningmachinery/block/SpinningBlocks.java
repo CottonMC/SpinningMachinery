@@ -31,10 +31,15 @@ public final class SpinningBlocks {
             new PlatePressBlock(
                     FabricBlockSettings.copy(Blocks.IRON_BLOCK)
                             .breakByTool(FabricToolTags.PICKAXES)
-                            .ticksRandomly()
                             .build()
             ),
             new Item.Settings().itemGroup(ItemGroup.DECORATIONS)
+    );
+
+    public static final Block MACHINE_CASING = register(
+            "machine_casing", new Block(
+                    FabricBlockSettings.copy(Blocks.IRON_BLOCK).breakByTool(FabricToolTags.PICKAXES).build()
+            ), new Item.Settings().itemGroup(ItemGroup.DECORATIONS)
     );
 
     public static final BlockEntityType<GrinderBlockEntity> GRINDER_BLOCK_ENTITY = register(

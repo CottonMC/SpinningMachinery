@@ -1,6 +1,6 @@
 {
   "parent": "spinning-machinery:block/grinder",
   "textures": {
-    "front": "minecraft:block/sandstone"
+    "front": "spinning-machinery:block/grinder_active"
   }
 }

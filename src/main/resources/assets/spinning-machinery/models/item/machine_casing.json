@@ -1,6 +1,3 @@
 {
-  "parent": "minecraft:block/cube_all",
-  "textures": {
-    "all": "block/water_still"
-  }
+  "parent": "spinning-machinery:block/machine_casing"
 }
