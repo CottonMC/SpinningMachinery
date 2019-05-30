@@ -31,6 +31,11 @@ repositories {
 
     // For clothesline and developer-mode
     maven(url = "https://maven.jamieswhiteshirt.com/libs-release/")
+
+    // For REI's deps
+    maven(url = "https://minecraft.curseforge.com/api/maven") {
+        name = "CurseForge"
+    }
 }
 
 tasks.getByName<ProcessResources>("processResources") {
@@ -84,9 +89,10 @@ dependencies {
     modApi("net.fabricmc.fabric-api:fabric-api:" + v("fabric-api"))
 
     // Other mods
-    modApi("com.jamieswhiteshirt:clothesline-fabric:0.0.16", excludeOldFabric)
+    modApi("com.jamieswhiteshirt:clothesline-fabric:" + v("clothesline"), excludeOldFabric)
     includedMod("io.github.cottonmc:cotton:" + v("cotton"), excludeOldFabric)
-    modRuntime("com.jamieswhiteshirt:developer-mode:1.0.11")
+    modImplementation("me.shedaniel:RoughlyEnoughItems:" + v("rei"))
+    modRuntime("com.jamieswhiteshirt:developer-mode:" + v("developer-mode"))
 
     // Other libraries
     compileOnly("com.google.code.findbugs:jsr305:3.0.2") { isTransitive = false }

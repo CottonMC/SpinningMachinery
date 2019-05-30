@@ -1,0 +1,7 @@
+{
+  "type": "spinning-machinery:grinding",
+  "input": { "item": "minecraft:cobblestone" },
+  "primary_output": "minecraft:gravel",
+  "bonus": "minecraft:flint",
+  "bonus_chance": 0.1
+}

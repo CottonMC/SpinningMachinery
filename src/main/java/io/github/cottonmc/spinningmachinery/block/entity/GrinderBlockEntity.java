@@ -31,7 +31,7 @@ public final class GrinderBlockEntity extends AbstractMachineBlockEntity
         implements Tickable, BlockEntityClientSerializable, SidedInventory, PropertyDelegateHolder, GrindingInventory {
     private static final String NBT_PROGRESS = "Progress";
     private static final String NBT_ACTIVE = "Active";
-    private static final int MAX_PROGRESS = 1000;
+    public static final int MAX_PROGRESS = 1000;
     private static final int[] DEFAULT_SLOTS = { 0 };
     private static final int[] DOWN_SLOTS = { 1, 2 };
     private int progress = 0;

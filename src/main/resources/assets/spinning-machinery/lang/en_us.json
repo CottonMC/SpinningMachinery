@@ -1,3 +1,5 @@
 {
-  "block.spinning-machinery.grinder": "Grinder"
+  "block.spinning-machinery.grinder": "Grinder",
+  "category.spinning-machinery.grinding": "Grinding",
+  "gui.spinning-machinery.grinding.bonus_chance_format": "%d%%"
 }

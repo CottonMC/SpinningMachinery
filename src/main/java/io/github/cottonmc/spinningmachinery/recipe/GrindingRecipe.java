@@ -11,6 +11,7 @@ import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.Recipe;
 import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.RecipeType;
+import net.minecraft.util.DefaultedList;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
 import net.minecraft.util.PacketByteBuf;
@@ -18,6 +19,7 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
+import java.util.Optional;
 
 public final class GrindingRecipe implements Recipe<GrindingInventory> {
     private final Identifier id;
@@ -46,7 +48,7 @@ public final class GrindingRecipe implements Recipe<GrindingInventory> {
     @Override
     public ItemStack craft(GrindingInventory inventory) {
         if (Math.random() < bonusChance) {
-            inventory.insertSecondaryOutput(getSecondaryOutputOrEmpty().copy());
+            inventory.insertSecondaryOutput(getBonusOrEmpty().copy());
         }
 
         return primaryOutput.copy();
@@ -82,8 +84,23 @@ public final class GrindingRecipe implements Recipe<GrindingInventory> {
         return group;
     }
 
-    private ItemStack getSecondaryOutputOrEmpty() {
+    public Optional<ItemStack> getBonus() {
+        return Optional.ofNullable(bonus);
+    }
+
+    private ItemStack getBonusOrEmpty() {
         return bonus != null ? bonus : ItemStack.EMPTY;
+    }
+
+    public double getBonusChance() {
+        return bonusChance;
+    }
+
+    @Override
+    public DefaultedList<Ingredient> getPreviewInputs() {
+        DefaultedList<Ingredient> list = DefaultedList.create();
+        list.add(input);
+        return list;
     }
 
     public static final class Serializer implements RecipeSerializer<GrindingRecipe> {
@@ -121,7 +138,7 @@ public final class GrindingRecipe implements Recipe<GrindingInventory> {
             buf.writeString(recipe.group);
             recipe.input.write(buf);
             buf.writeItemStack(recipe.primaryOutput);
-            buf.writeItemStack(recipe.getSecondaryOutputOrEmpty());
+            buf.writeItemStack(recipe.getBonusOrEmpty());
             buf.writeFloat(recipe.bonusChance);
         }
 
