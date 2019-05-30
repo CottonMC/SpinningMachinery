@@ -52,7 +52,7 @@ public final class GrindingRecipe implements Recipe<GrindingInventory> {
     @Override
     public ItemStack craft(GrindingInventory inventory) {
         if (Math.random() < bonusChance) {
-            inventory.insertSecondaryOutput(getBonusOrEmpty().copy());
+            inventory.insertProcessingBonus(getBonusOrEmpty().copy());
         }
 
         return primaryOutput.copy();

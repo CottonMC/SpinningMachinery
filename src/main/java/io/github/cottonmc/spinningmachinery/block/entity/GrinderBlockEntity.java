@@ -224,7 +224,7 @@ public final class GrinderBlockEntity extends AbstractMachineBlockEntity
     }
 
     @Override
-    public void insertSecondaryOutput(ItemStack stack) {
+    public void insertProcessingBonus(ItemStack stack) {
         if (canInsertIntoSlot(2, stack)) {
             insertIntoSlot(2, stack);
         } else {

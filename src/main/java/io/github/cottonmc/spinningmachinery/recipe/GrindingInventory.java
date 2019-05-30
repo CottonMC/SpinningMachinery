@@ -4,5 +4,5 @@ import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
 
 public interface GrindingInventory extends Inventory {
-    void insertSecondaryOutput(ItemStack stack);
+    void insertProcessingBonus(ItemStack stack);
 }

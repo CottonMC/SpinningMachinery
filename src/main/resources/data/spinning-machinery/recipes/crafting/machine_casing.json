@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "PAP",
+    " R ",
+    "P P"
+  ],
+  "key": {
+    "P": { "tag": "c:iron_plate" },
+    "R": { "item": "minecraft:redstone" },
+    "A": { "item": "clothesline-fabric:clothesline_anchor" }
+  },
+  "result": {
+    "item": "spinning-machinery:machine_casing"
+  }
+}

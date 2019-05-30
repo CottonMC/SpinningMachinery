@@ -90,6 +90,7 @@ dependencies {
 
     // Other mods
     modApi("com.jamieswhiteshirt:clothesline-fabric:" + v("clothesline"), excludeOldFabric)
+    modApi("io.github.cottonmc:cotton-resources:" + v("cotton-resources"), excludeOldFabric)
     includedMod("io.github.cottonmc:cotton:" + v("cotton"), excludeOldFabric)
     modImplementation("me.shedaniel:RoughlyEnoughItems:" + v("rei"))
     modRuntime("com.jamieswhiteshirt:developer-mode:" + v("developer-mode"))

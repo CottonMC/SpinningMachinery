@@ -10,6 +10,7 @@ import net.minecraft.block.Blocks;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.util.registry.Registry;
 
 public final class SpinningBlocks {
@@ -21,7 +22,7 @@ public final class SpinningBlocks {
                             .ticksRandomly()
                             .build()
             ),
-            new Item.Settings().itemGroup(SpinningMachinery.ITEM_GROUP)
+            new Item.Settings().itemGroup(ItemGroup.DECORATIONS)
     );
 
     public static final BlockEntityType<GrinderBlockEntity> GRINDER_BLOCK_ENTITY = register(

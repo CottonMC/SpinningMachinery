@@ -27,7 +27,7 @@ final class GrindingCategory implements RecipeCategory<GrindingDisplay> {
 
     @Override
     public String getCategoryName() {
-        return I18n.translate("category.spinning-machinery.grinding");
+        return I18n.translate("gui.spinning-machinery.grinding.category");
     }
 
     @Override
