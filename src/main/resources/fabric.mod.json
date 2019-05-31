@@ -20,6 +20,9 @@
     "spinning-machinery": [
       "io.github.cottonmc.spinningmachinery.SpinningDefaultPlugin",
       "io.github.cottonmc.spinningmachinery.compat.vivatech.SpinningVivatechPlugin"
+    ],
+    "cotton": [
+      "io.github.cottonmc.spinningmachinery.compat.refinedmachinery.SpinningRefinedMachineryPlugin"
     ]
   },
 
@@ -28,5 +31,7 @@
     "cotton": "*",
     "clothesline-fabric": "*",
     "cotton-resources": "*"
-  }
+  },
+
+  "mixins": ["mixins.spinning-machinery.json"]
 }

@@ -1,0 +1,11 @@
+{
+  "required": true,
+  "minVersion": "0.7.11",
+  "package": "io.github.cottonmc.spinningmachinery.mixin",
+  "mixins": [
+    "DataLoadMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

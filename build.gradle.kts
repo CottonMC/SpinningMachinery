@@ -39,6 +39,7 @@ allprojects {
         }
 
         maven(url = "https://mod-buildcraft.com/maven")
+        maven(url = "http://maven.abusedmaster.xyz/")
     }
 }
 
@@ -100,10 +101,14 @@ dependencies {
     // Mods with compat
     modImplementation("me.shedaniel:RoughlyEnoughItems:" + v("rei"))
     modImplementation("vivatech:vivatech:" + v("vivatech"))
-    modImplementation("io.github.cottonmc:cotton-energy:" + v("cotton-energy"), excludeOldFabric)
+    modImplementation("refined-machinery:RefinedMachinery:" + v("refined-machinery"))
 
     // Dev env mods
     modRuntime("com.jamieswhiteshirt:developer-mode:" + v("developer-mode"))
+    modRuntime("io.github.cottonmc:cotton-energy:" + v("cotton-energy"), excludeOldFabric)
+    modRuntime("abused_master.abusedlib:AbusedLib:" + v("abusedlib"), excludeOldFabric)
+    modRuntime("com.github.NerdHubMC:Cardinal-Energy:" + v("cardinal-energy"), excludeOldFabric)
+    modRuntime("com.github.NerdHubMC:Cardinal-Components-API:" + v("cardinal-components-api"), excludeOldFabric)
 
     // Other libraries
     compileOnly("com.google.code.findbugs:jsr305:3.0.2") { isTransitive = false }
