@@ -90,11 +90,15 @@ dependencies {
     modApi("net.fabricmc:fabric-loader:" + v("fabric-loader"))
     modApi("net.fabricmc.fabric-api:fabric-api:" + v("fabric-api"))
 
-    // Other mods
+    // Required and bundled mods
     modApi("com.jamieswhiteshirt:clothesline-fabric:" + v("clothesline"), excludeOldFabric)
     modApi("io.github.cottonmc:cotton-resources:" + v("cotton-resources"), excludeOldFabric)
     includedMod("io.github.cottonmc:cotton:" + v("cotton"), excludeOldFabric)
+
+    // Mods with compat
     modImplementation("me.shedaniel:RoughlyEnoughItems:" + v("rei"))
+
+    // Dev env mods
     modRuntime("com.jamieswhiteshirt:developer-mode:" + v("developer-mode"))
 
     // Other libraries

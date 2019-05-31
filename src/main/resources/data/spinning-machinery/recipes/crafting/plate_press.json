@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "/#/"
+  ],
+  "key": {
+    "#": { "item": "spinning-machinery:machine_casing" },
+    "/": { "item": "spinning-machinery:hammer" }
+  },
+  "result": {
+    "item": "spinning-machinery:plate_press"
+  }
+}
