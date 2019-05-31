@@ -58,7 +58,7 @@ public final class GrinderBlockEntity extends AbstractProcessorBlockEntity<Grind
     };
 
     public GrinderBlockEntity() {
-        super(SpinningBlocks.GRINDER_BLOCK_ENTITY, DefaultedList.create(3, ItemStack.EMPTY), SpinningRecipes.GRINDING);
+        super(SpinningBlocks.GRINDER_BLOCK_ENTITY, DefaultedList.create(3, ItemStack.EMPTY), SpinningRecipes.getAllGrindingRecipeTypes());
     }
 
     @Override

@@ -8,8 +8,11 @@ import io.github.cottonmc.spinningmachinery.recipe.SpinningRecipes;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Lazy;
+
+import java.util.List;
 
 public final class SpinningMachinery implements ModInitializer {
     public static final String NAMESPACE = "spinning-machinery";
@@ -23,6 +26,9 @@ public final class SpinningMachinery implements ModInitializer {
         SpinningGuis.init();
         // Load config
         CONFIG.get();
+
+        List<SpinningMachineryPlugin> plugins = FabricLoader.getInstance().getEntrypoints("spinning-machinery", SpinningMachineryPlugin.class);
+        SpinningRecipes.initPlugins(plugins);
     }
 
     @Environment(EnvType.CLIENT)

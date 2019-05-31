@@ -37,6 +37,8 @@ allprojects {
         maven(url = "https://minecraft.curseforge.com/api/maven") {
             name = "CurseForge"
         }
+
+        maven(url = "https://mod-buildcraft.com/maven")
     }
 }
 
@@ -97,6 +99,8 @@ dependencies {
 
     // Mods with compat
     modImplementation("me.shedaniel:RoughlyEnoughItems:" + v("rei"))
+    modImplementation("vivatech:vivatech:" + v("vivatech"))
+    modImplementation("io.github.cottonmc:cotton-energy:" + v("cotton-energy"), excludeOldFabric)
 
     // Dev env mods
     modRuntime("com.jamieswhiteshirt:developer-mode:" + v("developer-mode"))

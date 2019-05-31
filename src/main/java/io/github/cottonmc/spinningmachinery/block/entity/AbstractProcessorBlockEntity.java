@@ -14,11 +14,13 @@ import net.minecraft.util.Tickable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import java.util.Collection;
+
 // TODO: Combine with AMBE?
 public abstract class AbstractProcessorBlockEntity<I extends Inventory> extends AbstractMachineBlockEntity implements Tickable {
     public static final String NBT_PROGRESS = "Progress";
     public static final String NBT_ACTIVE = "Active";
-    private final RecipeType<? extends Recipe<I>> recipeType;
+    private final Collection<RecipeType<? extends Recipe<? super I>>> recipeTypes;
 
     protected int progress = 0;
     private boolean active = false;
@@ -34,11 +36,11 @@ public abstract class AbstractProcessorBlockEntity<I extends Inventory> extends 
      *
      * @param type the block entity type
      * @param items the inventory
-     * @param recipeType the recipe type
+     * @param recipeTypes the recipe types
      */
-    protected AbstractProcessorBlockEntity(BlockEntityType<?> type, DefaultedList<ItemStack> items, RecipeType<? extends Recipe<I>> recipeType) {
+    protected AbstractProcessorBlockEntity(BlockEntityType<?> type, DefaultedList<ItemStack> items, Collection<RecipeType<? extends Recipe<? super I>>> recipeTypes) {
         super(type, items);
-        this.recipeType = recipeType;
+        this.recipeTypes = recipeTypes;
     }
 
     protected abstract int getMaxProgress();
@@ -58,6 +60,7 @@ public abstract class AbstractProcessorBlockEntity<I extends Inventory> extends 
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public void tick() {
         if (!world.isClient) {
             boolean oldActive = active;
@@ -65,26 +68,33 @@ public abstract class AbstractProcessorBlockEntity<I extends Inventory> extends 
 
             if (momentum != 0) {
                 active = true;
-                Recipe<I> recipe = world.getRecipeManager()
-                        .getFirstMatch(recipeType, (I) this, world)
-                        .orElse(null);
+                boolean anyFound = false;
+                for (RecipeType<? extends Recipe<? super I>> recipeType : recipeTypes) {
+                    Recipe<I> recipe = world.getRecipeManager()
+                            .getFirstMatch((RecipeType<? extends Recipe<I>>) recipeType, (I) this, world)
+                            .orElse(null);
 
-                if (recipe != null && !items.get(0).isEmpty()) {
-                    // TODO: Tweak this
-                    progress += Math.abs(momentum) / 5;
+                    if (recipe != null && !items.get(0).isEmpty()) {
+                        // TODO: Tweak this
+                        progress += Math.abs(momentum) / 5;
 
-                    if (progress >= getMaxProgress()) {
-                        if (canAcceptRecipeOutput(recipe)) {
-                            progress = 0;
-                            insertIntoSlot(1, recipe.craft((I) this));
-                            items.get(0).subtractAmount(1);
-                        } else {
-                            progress = getMaxProgress();
+                        if (progress >= getMaxProgress()) {
+                            if (canAcceptRecipeOutput(recipe)) {
+                                progress = 0;
+                                insertIntoSlot(1, recipe.craft((I) this));
+                                items.get(0).subtractAmount(1);
+                            } else {
+                                progress = getMaxProgress();
+                            }
                         }
-                    }
 
-                    markDirty();
-                } else {
+                        anyFound = true;
+                        markDirty();
+                        break;
+                    }
+                }
+
+                if (!anyFound) {
                     progress = 0;
                     markDirty();
                 }

@@ -16,7 +16,11 @@
   "entrypoints": {
     "main": ["io.github.cottonmc.spinningmachinery.SpinningMachinery"],
     "client": ["io.github.cottonmc.spinningmachinery.SpinningMachinery::initClient"],
-    "rei_plugins": ["io.github.cottonmc.spinningmachinery.compat.rei.SpinningREIPlugin"]
+    "rei_plugins": ["io.github.cottonmc.spinningmachinery.compat.rei.SpinningREIPlugin"],
+    "spinning-machinery": [
+      "io.github.cottonmc.spinningmachinery.SpinningDefaultPlugin",
+      "io.github.cottonmc.spinningmachinery.compat.vivatech.SpinningVivatechPlugin"
+    ]
   },
 
   "depends": {

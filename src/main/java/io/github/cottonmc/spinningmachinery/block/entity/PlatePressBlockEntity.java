@@ -57,7 +57,7 @@ public final class PlatePressBlockEntity extends AbstractProcessorBlockEntity<In
     };
 
     public PlatePressBlockEntity() {
-        super(SpinningBlocks.PLATE_PRESS_BLOCK_ENTITY, DefaultedList.create(3, ItemStack.EMPTY), SpinningRecipes.PRESSING);
+        super(SpinningBlocks.PLATE_PRESS_BLOCK_ENTITY, DefaultedList.create(3, ItemStack.EMPTY), SpinningRecipes.getAllPressingRecipeTypes());
     }
 
     @Override
