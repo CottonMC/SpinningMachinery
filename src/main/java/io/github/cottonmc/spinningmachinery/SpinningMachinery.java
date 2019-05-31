@@ -1,7 +1,6 @@
 package io.github.cottonmc.spinningmachinery;
 
 import io.github.cottonmc.spinningmachinery.block.SpinningBlocks;
-import io.github.cottonmc.spinningmachinery.compat.autoconfig.SpinningAutoConfig;
 import io.github.cottonmc.spinningmachinery.config.SpinningConfig;
 import io.github.cottonmc.spinningmachinery.gui.SpinningGuis;
 import io.github.cottonmc.spinningmachinery.item.SpinningItems;
@@ -9,12 +8,12 @@ import io.github.cottonmc.spinningmachinery.recipe.SpinningRecipes;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Lazy;
 
 public final class SpinningMachinery implements ModInitializer {
     public static final String NAMESPACE = "spinning-machinery";
-    public static SpinningConfig config;
+    public static final Lazy<SpinningConfig> CONFIG = new Lazy<>(SpinningConfig::getInstance);
 
     @Override
     public void onInitialize() {
@@ -22,12 +21,8 @@ public final class SpinningMachinery implements ModInitializer {
         SpinningItems.init();
         SpinningRecipes.init();
         SpinningGuis.init();
-
-        if (FabricLoader.getInstance().isModLoaded("autoconfig1")) {
-            SpinningAutoConfig.init();
-        }
-
-        config = SpinningConfig.getInstance();
+        // Load config
+        CONFIG.get();
     }
 
     @Environment(EnvType.CLIENT)

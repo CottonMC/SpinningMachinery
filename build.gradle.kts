@@ -68,7 +68,7 @@ minecraft {
 }
 
 inline fun DependencyHandler.includedMod(str: String, block: ExternalModuleDependency.() -> Unit = {}) {
-    modImplementation(str, block)
+    modApi(str, block)
     include(str, block)
 }
 

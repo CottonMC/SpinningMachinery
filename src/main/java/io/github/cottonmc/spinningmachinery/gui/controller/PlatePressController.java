@@ -28,7 +28,7 @@ public final class PlatePressController extends AbstractMachineController {
         panel.validate(this);
         setRootPanel(panel);
 
-        MachineGuiConfig guiConfig = SpinningMachinery.config.machineScreens.platePress;
+        MachineGuiConfig guiConfig = SpinningMachinery.CONFIG.get().machineScreens.platePress;
         if (guiConfig.enabled) {
             panel.setBackgroundPainter(BackgroundPainter.createColorful(0xFF000000 | guiConfig.backgroundColor));
         }

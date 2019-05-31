@@ -29,7 +29,7 @@ public final class GrinderController extends AbstractMachineController {
         panel.validate(this);
         setRootPanel(panel);
 
-        MachineGuiConfig guiConfig = SpinningMachinery.config.machineScreens.grinder;
+        MachineGuiConfig guiConfig = SpinningMachinery.CONFIG.get().machineScreens.grinder;
         if (guiConfig.enabled) {
             panel.setBackgroundPainter(BackgroundPainter.createColorful(0xFF000000 | guiConfig.backgroundColor));
         }
