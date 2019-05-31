@@ -6,6 +6,7 @@ import me.shedaniel.rei.api.RecipeDisplay;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 
+import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -49,5 +50,10 @@ final class GrindingDisplay implements RecipeDisplay<GrindingRecipe> {
     @Override
     public Identifier getRecipeCategory() {
         return SpinningREIPlugin.GRINDING;
+    }
+
+    @Nullable
+    String getSourceMod() {
+        return recipe.getSourceMod();
     }
 }

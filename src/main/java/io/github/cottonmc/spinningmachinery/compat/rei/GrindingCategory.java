@@ -61,6 +61,12 @@ final class GrindingCategory implements RecipeCategory<GrindingDisplay> {
                         bonusChance != 0
                                 ? I18n.translate("gui.spinning-machinery.grinding.bonus_chance_format", bonusChance)
                                 : ""
+                ),
+                new LabelWidget(
+                        (int) bounds.getCenterX(), (int) bounds.getMaxY() - 14,
+                        display.getSourceMod() != null
+                                ? I18n.translate("gui.spinning-machinery.grinding.from_source", display.getSourceMod())
+                                : ""
                 )
         );
     }

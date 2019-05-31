@@ -57,6 +57,7 @@ public final class SpinningRefinedMachineryPlugin implements CottonInitializer {
                             output.addProperty("Count", recipe.getRandomDropAmoumt());
                         }));
                         result.addProperty("bonus_chance", recipe.getPercentageDrop() / 100.0);
+                        result.addProperty("source_mod", "Refined Machinery");
 
                         String jsonString = gson.toJson(result);
                         StringReader reader = new StringReader(jsonString);

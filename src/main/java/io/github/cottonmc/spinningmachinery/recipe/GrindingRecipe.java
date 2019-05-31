@@ -29,9 +29,11 @@ public final class GrindingRecipe implements Recipe<GrindingInventory> {
     @Nullable
     private final ItemStack bonus;
     private final float bonusChance;
+    @Nullable
+    private final String sourceMod;
 
     public GrindingRecipe(Identifier id, String group, Ingredient input, ItemStack primaryOutput,
-                          @Nullable ItemStack bonus, float bonusChance) {
+                          @Nullable ItemStack bonus, float bonusChance, @Nullable String sourceMod) {
         if (bonusChance < 0f || bonusChance > 1f) {
             throw new IllegalArgumentException("bonusChance must be between 0.0 and 1.0");
         }
@@ -42,6 +44,7 @@ public final class GrindingRecipe implements Recipe<GrindingInventory> {
         this.bonusChance = bonusChance;
         this.group = group;
         this.id = id;
+        this.sourceMod = sourceMod;
     }
 
     @Override
@@ -107,6 +110,11 @@ public final class GrindingRecipe implements Recipe<GrindingInventory> {
         return list;
     }
 
+    @Nullable
+    public String getSourceMod() {
+        return sourceMod;
+    }
+
     public static final class Serializer implements RecipeSerializer<GrindingRecipe> {
         @Override
         public GrindingRecipe read(Identifier id, JsonObject obj) {
@@ -121,8 +129,8 @@ public final class GrindingRecipe implements Recipe<GrindingInventory> {
                     Ingredient.fromJson(ingredientJson),
                     readItemStack(obj.get("primary_output")),
                     obj.has("bonus") ? readItemStack(obj.get("bonus")) : null,
-                    JsonHelper.getFloat(obj, "bonus_chance", 0f)
-            );
+                    JsonHelper.getFloat(obj, "bonus_chance", 0f),
+                    JsonHelper.getString(obj, "source_mod", null));
         }
 
         @Override
@@ -133,8 +141,8 @@ public final class GrindingRecipe implements Recipe<GrindingInventory> {
                     Ingredient.fromPacket(buf),
                     buf.readItemStack(),
                     buf.readItemStack(),
-                    buf.readFloat()
-            );
+                    buf.readFloat(),
+                    buf.readString(32767));
         }
 
         @Override
@@ -144,6 +152,7 @@ public final class GrindingRecipe implements Recipe<GrindingInventory> {
             buf.writeItemStack(recipe.primaryOutput);
             buf.writeItemStack(recipe.getBonusOrEmpty());
             buf.writeFloat(recipe.bonusChance);
+            buf.writeString(recipe.sourceMod != null ? recipe.sourceMod : "");
         }
 
         private static ItemStack readItemStack(JsonElement json) {
