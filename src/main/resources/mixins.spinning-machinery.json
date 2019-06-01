@@ -3,7 +3,12 @@
   "minVersion": "0.7.11",
   "package": "io.github.cottonmc.spinningmachinery.mixin",
   "mixins": [
-    "DataLoadMixin"
+    "DataLoadMixin",
+    "loot.CombinedEntryMixin",
+    "loot.ItemEntryMixin",
+    "loot.LootPoolAccessor",
+    "loot.LootSupplierAccessor",
+    "loot.TagEntryMixin"
   ],
   "injectors": {
     "defaultRequire": 1

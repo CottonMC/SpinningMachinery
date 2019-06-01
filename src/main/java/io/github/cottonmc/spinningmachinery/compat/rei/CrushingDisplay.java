@@ -1,6 +1,7 @@
 package io.github.cottonmc.spinningmachinery.compat.rei;
 
 import io.github.cottonmc.cotton.datapack.recipe.CrushingRecipe;
+import io.github.cottonmc.spinningmachinery.compat.rei.loot.LootUtils;
 import me.shedaniel.rei.api.RecipeDisplay;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
@@ -15,6 +16,7 @@ final class CrushingDisplay implements RecipeDisplay<CrushingRecipe>, AnyGrindin
     private final CrushingRecipe recipe;
     private final List<List<ItemStack>> input;
     private final List<ItemStack> output;
+    private final List<ItemStack> bonusStacks;
 
     CrushingDisplay(CrushingRecipe recipe) {
         this.recipe = recipe;
@@ -22,6 +24,7 @@ final class CrushingDisplay implements RecipeDisplay<CrushingRecipe>, AnyGrindin
                 .map(ingredient -> Arrays.asList(ingredient.getStackArray()))
                 .collect(Collectors.toList());
         output = Collections.singletonList(recipe.getOutput());
+        bonusStacks = LootUtils.getAllStacks(recipe.getBonusLootTable());
     }
 
     @Override
@@ -51,7 +54,7 @@ final class CrushingDisplay implements RecipeDisplay<CrushingRecipe>, AnyGrindin
 
     @Override
     public List<ItemStack> getBonusStacks() {
-        return Collections.emptyList();
+        return bonusStacks;
     }
 
     @Override

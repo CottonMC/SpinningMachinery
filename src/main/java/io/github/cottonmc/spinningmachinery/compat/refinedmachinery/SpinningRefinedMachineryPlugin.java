@@ -31,8 +31,8 @@ public final class SpinningRefinedMachineryPlugin {
 
     @SuppressWarnings("unchecked")
     public static void initCotton() {
-        PulverizerRecipes recipes = new PulverizerRecipes();
-        recipes.initRecipes();
+        LOGGER.info("[Spinning Machinery] Converting Refined Machinery recipes");
+        PulverizerRecipes recipes = PulverizerRecipes.INSTANCE;
         try {
             Field recipeMapField = PulverizerRecipes.class.getDeclaredField("recipesMap");
             recipeMapField.setAccessible(true);
@@ -64,7 +64,13 @@ public final class SpinningRefinedMachineryPlugin {
                     });
             Map<String, Supplier<InputStream>> contents = new HashMap<>();
             virtualContents.forEach(pair -> contents.put(pair.getLeft(), pair.getRight()));
-            VirtualResourcePackCreator.INSTANCE.addPack(new VirtualResourcePack(Collections.singleton("spinning-machinery"), contents));
+            VirtualResourcePackCreator.INSTANCE.addPack(
+                    new VirtualResourcePack(
+                            "refined_machinery_converted_recipes",
+                            Collections.singleton("spinning-machinery"),
+                            contents
+                    )
+            );
         } catch (Exception e) {
             LOGGER.error("Exception while converting Refined Machinery recipes to Spinning Machinery recipes", e);
         }
