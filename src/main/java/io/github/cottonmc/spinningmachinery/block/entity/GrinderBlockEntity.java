@@ -155,7 +155,7 @@ public final class GrinderBlockEntity extends AbstractProcessorBlockEntity<Grind
             ServerWorld serverWorld = (ServerWorld) world;
             LootContext context = new LootContext.Builder(serverWorld)
                     .setRandom(world.getRandom())
-                    .build(LootContextTypes.BLOCK); // TODO: Which LootContextType?
+                    .build(LootContextTypes.EMPTY); // TODO: Which LootContextType?
 
             for (ItemStack bonus : processingRecipe.craftBonus(serverWorld.getServer().getLootManager(), context)) {
                 insertProcessingBonus(bonus);

@@ -1,34 +1,31 @@
 package io.github.cottonmc.spinningmachinery.compat.rei;
 
-import com.google.common.collect.ImmutableList;
-import io.github.cottonmc.spinningmachinery.recipe.GrindingRecipe;
+import io.github.cottonmc.cotton.datapack.recipe.CrushingRecipe;
 import me.shedaniel.rei.api.RecipeDisplay;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 
-import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-final class GrindingDisplay implements RecipeDisplay<GrindingRecipe>, AnyGrindingDisplay<GrindingRecipe> {
-    private final GrindingRecipe recipe;
+final class CrushingDisplay implements RecipeDisplay<CrushingRecipe>, AnyGrindingDisplay<CrushingRecipe> {
+    private final CrushingRecipe recipe;
     private final List<List<ItemStack>> input;
     private final List<ItemStack> output;
 
-    GrindingDisplay(GrindingRecipe recipe) {
+    CrushingDisplay(CrushingRecipe recipe) {
         this.recipe = recipe;
         input = recipe.getPreviewInputs().stream()
                 .map(ingredient -> Arrays.asList(ingredient.getStackArray()))
                 .collect(Collectors.toList());
-
-        output = ImmutableList.of(recipe.getOutput(), recipe.getBonus().orElse(ItemStack.EMPTY));
+        output = Collections.singletonList(recipe.getOutput());
     }
 
     @Override
-    public Optional<GrindingRecipe> getRecipe() {
+    public Optional<CrushingRecipe> getRecipe() {
         return Optional.of(recipe);
     }
 
@@ -43,28 +40,22 @@ final class GrindingDisplay implements RecipeDisplay<GrindingRecipe>, AnyGrindin
     }
 
     @Override
-    public List<List<ItemStack>> getRequiredItems() {
-        return input;
-    }
-
-    @Override
     public Identifier getRecipeCategory() {
         return SpinningREIPlugin.GRINDING;
     }
 
-    @Nullable
     @Override
     public String getSourceMod() {
-        return recipe.getSourceMod();
+        return "Cotton";
     }
 
     @Override
     public List<ItemStack> getBonusStacks() {
-        return recipe.getBonus().map(Collections::singletonList).orElse(Collections.emptyList());
+        return Collections.emptyList();
     }
 
     @Override
     public double getBonusChance() {
-        return recipe.getBonusChance();
+        return 0;
     }
 }

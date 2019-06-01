@@ -23,7 +23,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.Supplier;
 
-final class GrindingCategory implements RecipeCategory<GrindingDisplay> {
+final class GrindingCategory implements RecipeCategory<AnyGrindingDisplay<?>> {
     @Override
     public Identifier getIdentifier() {
         return SpinningREIPlugin.GRINDING;
@@ -40,18 +40,15 @@ final class GrindingCategory implements RecipeCategory<GrindingDisplay> {
     }
 
     @Override
-    public List<Widget> setupDisplay(Supplier<GrindingDisplay> recipeDisplaySupplier, Rectangle bounds) {
-        GrindingDisplay display = recipeDisplaySupplier.get();
+    public List<Widget> setupDisplay(Supplier<AnyGrindingDisplay<?>> recipeDisplaySupplier, Rectangle bounds) {
+        AnyGrindingDisplay<?> display = recipeDisplaySupplier.get();
         int x = (int) bounds.getX();
         int y = (int) bounds.getCenterY() - 9;
 
-        List<ItemStack> bonusStacks = display.getRecipe()
-                .flatMap(GrindingRecipe::getBonus)
-                .map(Collections::singletonList)
-                .orElse(Collections.emptyList());
+        List<ItemStack> bonusStacks = display.getBonusStacks();
 
         int bonusChance = display.getRecipe()
-                .map(recipe -> (int) (recipe.getBonusChance() * 100.0))
+                .map(recipe -> (int) (display.getBonusChance() * 100.0))
                 .orElse(0);
 
         ImmutableList.Builder<Widget> builder = ImmutableList.<Widget>builder()
