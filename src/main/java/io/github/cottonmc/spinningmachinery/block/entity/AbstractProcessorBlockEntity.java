@@ -83,6 +83,7 @@ public abstract class AbstractProcessorBlockEntity<I extends Inventory> extends 
                                 progress = 0;
                                 insertIntoSlot(1, recipe.craft((I) this));
                                 items.get(0).subtractAmount(1);
+                                onCrafted(recipe);
                             } else {
                                 progress = getMaxProgress();
                             }
@@ -159,4 +160,6 @@ public abstract class AbstractProcessorBlockEntity<I extends Inventory> extends 
         NetworkNode node = ((NetworkManagerProvider) world).getNetworkManager().getNetworks().getNodes().get(pos);
         return node != null ? node.getNetwork().getState().getMomentum() : 0;
     }
+
+    protected void onCrafted(Recipe<? super I> recipe) {}
 }

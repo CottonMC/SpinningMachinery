@@ -8,6 +8,7 @@
   "gui.spinning-machinery.grinding.from_source": "From %s",
   "gui.spinning-machinery.pressing.category": "Pressing",
   "gui.spinning-machinery.hammering.category": "Hammering",
+  "gui.spinning-machinery.info_symbol": "i",
 
   "item.spinning-machinery.hammer": "Hammer"
 }

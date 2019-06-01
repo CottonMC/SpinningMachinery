@@ -22,7 +22,7 @@
       "io.github.cottonmc.spinningmachinery.compat.vivatech.SpinningVivatechPlugin"
     ],
     "cotton": [
-      "io.github.cottonmc.spinningmachinery.compat.refinedmachinery.SpinningRefinedMachineryPlugin"
+      "io.github.cottonmc.spinningmachinery.SpinningMachinery::initCotton"
     ]
   },
 

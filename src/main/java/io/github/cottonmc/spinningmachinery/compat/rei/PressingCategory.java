@@ -2,13 +2,12 @@ package io.github.cottonmc.spinningmachinery.compat.rei;
 
 import com.google.common.collect.ImmutableList;
 import io.github.cottonmc.spinningmachinery.block.SpinningBlocks;
-import io.github.cottonmc.spinningmachinery.block.entity.GrinderBlockEntity;
 import io.github.cottonmc.spinningmachinery.block.entity.PlatePressBlockEntity;
-import io.github.cottonmc.spinningmachinery.recipe.GrindingRecipe;
+import io.github.cottonmc.spinningmachinery.compat.rei.widget.ProgressArrowWidget;
+import io.github.cottonmc.spinningmachinery.compat.rei.widget.SMSlotWidget;
 import me.shedaniel.rei.api.RecipeCategory;
 import me.shedaniel.rei.api.Renderable;
 import me.shedaniel.rei.api.Renderer;
-import me.shedaniel.rei.gui.widget.LabelWidget;
 import me.shedaniel.rei.gui.widget.RecipeBaseWidget;
 import me.shedaniel.rei.gui.widget.Widget;
 import net.minecraft.client.resource.language.I18n;

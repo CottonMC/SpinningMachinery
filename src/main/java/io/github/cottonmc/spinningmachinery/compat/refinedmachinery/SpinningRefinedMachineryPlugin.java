@@ -6,7 +6,6 @@ import com.google.common.base.Charsets;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.mojang.datafixers.DataFixUtils;
-import io.github.cottonmc.cotton.CottonInitializer;
 import io.github.cottonmc.spinningmachinery.internal.VirtualResourcePack;
 import io.github.cottonmc.spinningmachinery.internal.VirtualResourcePackCreator;
 import net.minecraft.item.ItemStack;
@@ -27,12 +26,11 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
 
-public final class SpinningRefinedMachineryPlugin implements CottonInitializer {
+public final class SpinningRefinedMachineryPlugin {
     private static final Logger LOGGER = LogManager.getLogger();
 
-    @Override
     @SuppressWarnings("unchecked")
-    public void onCottonInit() {
+    public static void initCotton() {
         PulverizerRecipes recipes = new PulverizerRecipes();
         recipes.initRecipes();
         try {

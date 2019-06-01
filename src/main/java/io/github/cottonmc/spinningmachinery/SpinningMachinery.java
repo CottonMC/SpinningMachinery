@@ -1,6 +1,7 @@
 package io.github.cottonmc.spinningmachinery;
 
 import io.github.cottonmc.spinningmachinery.block.SpinningBlocks;
+import io.github.cottonmc.spinningmachinery.compat.refinedmachinery.SpinningRefinedMachineryPlugin;
 import io.github.cottonmc.spinningmachinery.config.SpinningConfig;
 import io.github.cottonmc.spinningmachinery.gui.SpinningGuis;
 import io.github.cottonmc.spinningmachinery.item.SpinningItems;
@@ -34,6 +35,12 @@ public final class SpinningMachinery implements ModInitializer {
     @Environment(EnvType.CLIENT)
     public static void initClient() {
         SpinningGuis.initClient();
+    }
+
+    public static void initCotton() {
+        if (FabricLoader.getInstance().isModLoaded("refinedmachinery")) {
+            SpinningRefinedMachineryPlugin.initCotton();
+        }
     }
 
     public static Identifier id(String path) {

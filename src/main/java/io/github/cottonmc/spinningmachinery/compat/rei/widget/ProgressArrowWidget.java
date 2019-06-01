@@ -1,6 +1,7 @@
-package io.github.cottonmc.spinningmachinery.compat.rei;
+package io.github.cottonmc.spinningmachinery.compat.rei.widget;
 
 import io.github.cottonmc.cotton.gui.widget.WBar;
+import io.github.cottonmc.spinningmachinery.compat.rei.widget.RenderWBar;
 import io.github.cottonmc.spinningmachinery.gui.Textures;
 import me.shedaniel.rei.gui.widget.Widget;
 import net.minecraft.client.gui.Element;
@@ -10,12 +11,12 @@ import net.minecraft.container.PropertyDelegate;
 import java.util.Collections;
 import java.util.List;
 
-final class ProgressArrowWidget extends Widget {
+public final class ProgressArrowWidget extends Widget {
     private final int x;
     private final int y;
     private final WBar renderBar;
 
-    ProgressArrowWidget(int x, int y, int width, int height, int maxProgress) {
+    public ProgressArrowWidget(int x, int y, int width, int height, int maxProgress) {
         this.x = x;
         this.y = y;
         PropertyDelegate renderProperties = new PropertyDelegate() {

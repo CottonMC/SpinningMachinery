@@ -1,8 +1,8 @@
 package io.github.cottonmc.spinningmachinery.compat.rei;
 
 import com.google.common.collect.ImmutableList;
-import io.github.cottonmc.spinningmachinery.block.SpinningBlocks;
-import io.github.cottonmc.spinningmachinery.block.entity.PlatePressBlockEntity;
+import io.github.cottonmc.spinningmachinery.compat.rei.widget.SMSlotWidget;
+import io.github.cottonmc.spinningmachinery.compat.rei.widget.StaticArrowWidget;
 import io.github.cottonmc.spinningmachinery.item.SpinningItems;
 import me.shedaniel.rei.api.RecipeCategory;
 import me.shedaniel.rei.api.Renderable;

@@ -1,4 +1,4 @@
-package io.github.cottonmc.spinningmachinery.compat.rei;
+package io.github.cottonmc.spinningmachinery.compat.rei.widget;
 
 import com.mojang.blaze3d.platform.GlStateManager;
 import io.github.cottonmc.spinningmachinery.gui.Textures;
@@ -10,13 +10,13 @@ import net.minecraft.client.render.GuiLighting;
 import java.util.Collections;
 import java.util.List;
 
-final class StaticArrowWidget extends Widget {
+public final class StaticArrowWidget extends Widget {
     private final int x;
     private final int y;
     private final int width;
     private final int height;
 
-    StaticArrowWidget(int x, int y, int width, int height) {
+    public StaticArrowWidget(int x, int y, int width, int height) {
         this.x = x;
         this.y = y;
         this.width = width;

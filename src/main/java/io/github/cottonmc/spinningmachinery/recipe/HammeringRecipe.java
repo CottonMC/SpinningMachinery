@@ -30,7 +30,6 @@ import net.minecraft.world.World;
 
 import java.util.stream.Collectors;
 
-// TODO: Generate these
 public final class HammeringRecipe implements Recipe<HammeringInventory> {
     private final Identifier id;
     private final String group;

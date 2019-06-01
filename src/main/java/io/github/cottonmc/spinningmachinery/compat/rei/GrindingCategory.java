@@ -3,6 +3,9 @@ package io.github.cottonmc.spinningmachinery.compat.rei;
 import com.google.common.collect.ImmutableList;
 import io.github.cottonmc.spinningmachinery.block.SpinningBlocks;
 import io.github.cottonmc.spinningmachinery.block.entity.GrinderBlockEntity;
+import io.github.cottonmc.spinningmachinery.compat.rei.widget.InfoWidget;
+import io.github.cottonmc.spinningmachinery.compat.rei.widget.ProgressArrowWidget;
+import io.github.cottonmc.spinningmachinery.compat.rei.widget.SMSlotWidget;
 import io.github.cottonmc.spinningmachinery.recipe.GrindingRecipe;
 import me.shedaniel.rei.api.RecipeCategory;
 import me.shedaniel.rei.api.Renderable;
@@ -12,6 +15,7 @@ import me.shedaniel.rei.gui.widget.RecipeBaseWidget;
 import me.shedaniel.rei.gui.widget.Widget;
 import net.minecraft.client.resource.language.I18n;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.util.Identifier;
 
 import java.awt.Rectangle;
@@ -50,24 +54,26 @@ final class GrindingCategory implements RecipeCategory<GrindingDisplay> {
                 .map(recipe -> (int) (recipe.getBonusChance() * 100.0))
                 .orElse(0);
 
-        return ImmutableList.of(
-                new RecipeBaseWidget(bounds),
-                new ProgressArrowWidget(x + 2 * 18 + 6, y, 3 * 18 - 15, 18, GrinderBlockEntity.MAX_PROGRESS),
-                new SMSlotWidget(x + 18, y, display.getInput().get(0), true, true),
-                SMSlotWidget.createBig(x + 5 * 18, y, Collections.singletonList(display.getOutput().get(0)), true, true),
-                new SMSlotWidget(x + 6 * 18 + 10, y, bonusStacks, true, true),
-                new LabelWidget(
+        ImmutableList.Builder<Widget> builder = ImmutableList.<Widget>builder()
+                .add(new RecipeBaseWidget(bounds))
+                .add(new ProgressArrowWidget(x + 2 * 18 + 6, y, 3 * 18 - 15, 18, GrinderBlockEntity.MAX_PROGRESS))
+                .add(new SMSlotWidget(x + 18, y, display.getInput().get(0), true, true))
+                .add(SMSlotWidget.createBig(x + 5 * 18, y, Collections.singletonList(display.getOutput().get(0)), true, true))
+                .add(new SMSlotWidget(x + 6 * 18 + 10, y, bonusStacks, true, true))
+                .add(new LabelWidget(
                         x + 7 * 18, y + 18,
                         bonusChance != 0
                                 ? I18n.translate("gui.spinning-machinery.grinding.bonus_chance_format", bonusChance)
                                 : ""
-                ),
-                new LabelWidget(
-                        (int) bounds.getCenterX(), (int) bounds.getMaxY() - 14,
-                        display.getSourceMod() != null
-                                ? I18n.translate("gui.spinning-machinery.grinding.from_source", display.getSourceMod())
-                                : ""
-                )
-        );
+                ));
+
+        if (display.getSourceMod() != null) {
+            builder.add(new InfoWidget(
+                    x + 4, bounds.y + 4, 12, 12,
+                    new TranslatableComponent("gui.spinning-machinery.grinding.from_source", display.getSourceMod())
+            ));
+        }
+
+        return builder.build();
     }
 }

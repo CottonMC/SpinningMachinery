@@ -1,4 +1,4 @@
-package io.github.cottonmc.spinningmachinery.compat.rei;
+package io.github.cottonmc.spinningmachinery.compat.rei.widget;
 
 import io.github.cottonmc.cotton.gui.widget.WBar;
 import net.minecraft.container.PropertyDelegate;
