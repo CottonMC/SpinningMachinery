@@ -71,7 +71,7 @@ minecraft {
 }
 
 inline fun DependencyHandler.includedMod(str: String, block: ExternalModuleDependency.() -> Unit = {}) {
-    modApi(str, block)
+    modImplementation(str, block)
     include(str, block)
 }
 
@@ -90,12 +90,12 @@ dependencies {
     mappings("net.fabricmc:yarn:" + v("minecraft") + '+' + v("mappings"))
 
     // Fabric
-    modApi("net.fabricmc:fabric-loader:" + v("fabric-loader"))
-    modApi("net.fabricmc.fabric-api:fabric-api:" + v("fabric-api"))
+    modImplementation("net.fabricmc:fabric-loader:" + v("fabric-loader"))
+    modImplementation("net.fabricmc.fabric-api:fabric-api:" + v("fabric-api"))
 
     // Required and bundled mods
-    modApi("com.jamieswhiteshirt:clothesline-fabric:" + v("clothesline"), excludeOldFabric)
-    modApi("io.github.cottonmc:cotton-resources:" + v("cotton-resources"), excludeOldFabric)
+    modImplementation("com.jamieswhiteshirt:clothesline-fabric:" + v("clothesline"), excludeOldFabric)
+    modImplementation("io.github.cottonmc:cotton-resources:" + v("cotton-resources"), excludeOldFabric)
     includedMod("io.github.cottonmc:cotton:" + v("cotton"), excludeOldFabric)
 
     // Mods with compat
