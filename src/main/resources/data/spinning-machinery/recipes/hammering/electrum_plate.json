@@ -2,7 +2,7 @@
   "type": "spinning-machinery:hammering",
   "input": "c:electrum_block",
   "output": {
-    "id": "c:electrum_plate",
-    "Count": 4
+    "item": "c:electrum_plate",
+    "count": 4
   }
 }

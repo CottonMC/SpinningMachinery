@@ -2,7 +2,7 @@
   "type": "spinning-machinery:hammering",
   "input": "c:tin_block",
   "output": {
-    "id": "c:tin_plate",
-    "Count": 4
+    "item": "c:tin_plate",
+    "count": 4
   }
 }

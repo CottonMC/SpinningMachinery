@@ -24,7 +24,7 @@ final class PlatePressingRecipe extends AbstractContentGenerator {
                 new MapJsonOutput(ImmutableMap.of(
                         "type", "spinning-machinery:pressing",
                         "input", ImmutableMap.of("item", new Identifier("c", identifier.getPath() + "_ingot")),
-                        "output", new Identifier("c", identifier.getPath() + "_plate")
+                        "output", ImmutableMap.of("item", new Identifier("c", identifier.getPath() + "_plate"))
                 )),
                 "plate"
         ));

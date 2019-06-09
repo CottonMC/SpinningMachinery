@@ -3,5 +3,7 @@
   "input": {
     "item": "minecraft:gold_ingot"
   },
-  "output": "c:gold_plate"
+  "output": {
+    "item": "c:gold_plate"
+  }
 }

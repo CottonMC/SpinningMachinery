@@ -2,7 +2,7 @@
   "type": "spinning-machinery:hammering",
   "input": "c:iridium_block",
   "output": {
-    "id": "c:iridium_plate",
-    "Count": 4
+    "item": "c:iridium_plate",
+    "count": 4
   }
 }

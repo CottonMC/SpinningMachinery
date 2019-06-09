@@ -2,21 +2,15 @@ package io.github.cottonmc.spinningmachinery.recipe;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.mojang.datafixers.Dynamic;
-import com.mojang.datafixers.types.JsonOps;
-import net.minecraft.datafixers.NbtOps;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.recipe.Ingredient;
-import net.minecraft.recipe.Recipe;
-import net.minecraft.recipe.RecipeSerializer;
-import net.minecraft.recipe.RecipeType;
+import net.minecraft.recipe.*;
 import net.minecraft.util.DefaultedList;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
 import net.minecraft.util.PacketByteBuf;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.annotation.Nullable;
 import java.util.Optional;
@@ -116,21 +110,29 @@ public final class GrindingRecipe implements Recipe<GrindingInventory> {
     }
 
     public static final class Serializer implements RecipeSerializer<GrindingRecipe> {
+        private static final Logger LOGGER = LogManager.getLogger();
+
         @Override
         public GrindingRecipe read(Identifier id, JsonObject obj) {
-            JsonElement ingredientJson =
-                    JsonHelper.hasArray(obj, "input")
-                            ? JsonHelper.getArray(obj, "input")
-                            : JsonHelper.getObject(obj, "input");
+            try {
+                JsonElement ingredientJson =
+                        JsonHelper.hasArray(obj, "input")
+                                ? JsonHelper.getArray(obj, "input")
+                                : JsonHelper.getObject(obj, "input");
 
-            return new GrindingRecipe(
-                    id,
-                    JsonHelper.getString(obj, "group", ""),
-                    Ingredient.fromJson(ingredientJson),
-                    readItemStack(obj.get("primary_output")),
-                    obj.has("bonus") ? readItemStack(obj.get("bonus")) : null,
-                    JsonHelper.getFloat(obj, "bonus_chance", 0f),
-                    JsonHelper.getString(obj, "source_mod", null));
+                return new GrindingRecipe(
+                        id,
+                        JsonHelper.getString(obj, "group", ""),
+                        Ingredient.fromJson(ingredientJson),
+                        ShapedRecipe.getItemStack(obj.getAsJsonObject("primary_output")),
+                        obj.has("bonus") ? ShapedRecipe.getItemStack(obj.getAsJsonObject("bonus")) : null,
+                        JsonHelper.getFloat(obj, "bonus_chance", 0f),
+                        JsonHelper.getString(obj, "source_mod", null)
+                );
+            } catch (Exception e) {
+                LOGGER.error("Failed to load grinding recipe " + id, e);
+                throw new RuntimeException(e);
+            }
         }
 
         @Override
@@ -153,19 +155,6 @@ public final class GrindingRecipe implements Recipe<GrindingInventory> {
             buf.writeItemStack(recipe.getBonusOrEmpty());
             buf.writeFloat(recipe.bonusChance);
             buf.writeString(recipe.sourceMod != null ? recipe.sourceMod : "");
-        }
-
-        private static ItemStack readItemStack(JsonElement json) {
-            if (json.isJsonPrimitive())
-                return new ItemStack(
-                        Registry.ITEM.getOrEmpty(
-                                new Identifier(json.getAsString())
-                        ).orElseThrow(() -> new IllegalStateException("Item " + json.getAsString() + " does not exist"))
-                );
-            else if (!json.isJsonObject())
-                throw new IllegalArgumentException("Invalid json input type for an item stack; must be a string or an object");
-            else
-                return ItemStack.fromTag((CompoundTag) Dynamic.convert(JsonOps.INSTANCE, NbtOps.INSTANCE, json));
         }
     }
 }

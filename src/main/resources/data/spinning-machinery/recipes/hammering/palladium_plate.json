@@ -2,7 +2,7 @@
   "type": "spinning-machinery:hammering",
   "input": "c:palladium_block",
   "output": {
-    "id": "c:palladium_plate",
-    "Count": 4
+    "item": "c:palladium_plate",
+    "count": 4
   }
 }

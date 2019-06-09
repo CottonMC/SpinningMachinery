@@ -3,5 +3,7 @@
   "input": {
     "item": "c:uranium_ingot"
   },
-  "output": "c:uranium_plate"
+  "output": {
+    "item": "c:uranium_plate"
+  }
 }

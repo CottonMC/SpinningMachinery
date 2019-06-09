@@ -3,5 +3,7 @@
   "input": {
     "item": "c:thorium_ingot"
   },
-  "output": "c:thorium_plate"
+  "output": {
+    "item": "c:thorium_plate"
+  }
 }

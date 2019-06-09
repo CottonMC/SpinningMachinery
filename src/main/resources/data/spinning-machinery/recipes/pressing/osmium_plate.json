@@ -3,5 +3,7 @@
   "input": {
     "item": "c:osmium_ingot"
   },
-  "output": "c:osmium_plate"
+  "output": {
+    "item": "c:osmium_plate"
+  }
 }

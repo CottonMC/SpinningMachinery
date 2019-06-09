@@ -3,5 +3,7 @@
   "input": {
     "item": "c:brass_ingot"
   },
-  "output": "c:brass_plate"
+  "output": {
+    "item": "c:brass_plate"
+  }
 }

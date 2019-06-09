@@ -25,8 +25,8 @@ final class PlateHammeringRecipe extends AbstractContentGenerator {
                         "type", "spinning-machinery:hammering",
                         "input", new Identifier("c", identifier.getPath() + "_block"),
                         "output", ImmutableMap.of(
-                                "id", new Identifier("c", identifier.getPath() + "_plate"),
-                                "Count", 4
+                                "item", new Identifier("c", identifier.getPath() + "_plate"),
+                                "count", 4
                         )
                 )),
                 "plate"

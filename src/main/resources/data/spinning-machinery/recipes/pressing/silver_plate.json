@@ -3,5 +3,7 @@
   "input": {
     "item": "c:silver_ingot"
   },
-  "output": "c:silver_plate"
+  "output": {
+    "item": "c:silver_plate"
+  }
 }

@@ -2,7 +2,7 @@
   "type": "spinning-machinery:hammering",
   "input": "c:brass_block",
   "output": {
-    "id": "c:brass_plate",
-    "Count": 4
+    "item": "c:brass_plate",
+    "count": 4
   }
 }

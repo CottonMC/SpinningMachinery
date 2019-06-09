@@ -3,5 +3,7 @@
   "input": {
     "item": "c:platinum_ingot"
   },
-  "output": "c:platinum_plate"
+  "output": {
+    "item": "c:platinum_plate"
+  }
 }

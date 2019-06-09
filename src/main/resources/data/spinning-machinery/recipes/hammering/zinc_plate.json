@@ -2,7 +2,7 @@
   "type": "spinning-machinery:hammering",
   "input": "c:zinc_block",
   "output": {
-    "id": "c:zinc_plate",
-    "Count": 4
+    "item": "c:zinc_plate",
+    "count": 4
   }
 }

@@ -3,5 +3,7 @@
   "input": {
     "item": "minecraft:iron_ingot"
   },
-  "output": "c:iron_plate"
+  "output": {
+    "item": "c:iron_plate"
+  }
 }

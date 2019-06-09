@@ -2,7 +2,7 @@
   "type": "spinning-machinery:hammering",
   "input": "c:thorium_block",
   "output": {
-    "id": "c:thorium_plate",
-    "Count": 4
+    "item": "c:thorium_plate",
+    "count": 4
   }
 }

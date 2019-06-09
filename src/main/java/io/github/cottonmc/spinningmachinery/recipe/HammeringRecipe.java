@@ -1,25 +1,13 @@
 package io.github.cottonmc.spinningmachinery.recipe;
 
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.mojang.brigadier.StringReader;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import com.mojang.datafixers.Dynamic;
-import com.mojang.datafixers.types.JsonOps;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
 import net.minecraft.command.arguments.BlockStateArgument;
 import net.minecraft.command.arguments.BlockStateArgumentType;
-import net.minecraft.datafixers.NbtOps;
-import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.recipe.Ingredient;
-import net.minecraft.recipe.Recipe;
-import net.minecraft.recipe.RecipeSerializer;
-import net.minecraft.recipe.RecipeType;
+import net.minecraft.recipe.*;
 import net.minecraft.state.property.Property;
 import net.minecraft.util.DefaultedList;
 import net.minecraft.util.Identifier;
@@ -27,6 +15,8 @@ import net.minecraft.util.JsonHelper;
 import net.minecraft.util.PacketByteBuf;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.stream.Collectors;
 
@@ -92,6 +82,7 @@ public final class HammeringRecipe implements Recipe<HammeringInventory> {
 
     public static final class Serializer implements RecipeSerializer<HammeringRecipe> {
         private static final BlockStateArgumentType BLOCK_STATE_ARGUMENT_TYPE = BlockStateArgumentType.create();
+        private static final Logger LOGGER = LogManager.getLogger();
 
         @Override
         public HammeringRecipe read(Identifier id, JsonObject obj) {
@@ -100,10 +91,14 @@ public final class HammeringRecipe implements Recipe<HammeringInventory> {
                         id,
                         JsonHelper.getString(obj, "group", ""),
                         BLOCK_STATE_ARGUMENT_TYPE.parse(new StringReader(JsonHelper.getString(obj, "input"))),
-                        readItemStack(obj.get("output"))
+                        ShapedRecipe.getItemStack(obj.getAsJsonObject("output"))
                 );
             } catch (CommandSyntaxException e) {
+                LOGGER.error("Failed to load hammering recipe " + id, e);
                 throw new JsonParseException("Error while parsing hammering recipe", e);
+            } catch (Exception e) {
+                LOGGER.error("Failed to load hammering recipe " + id, e);
+                throw new RuntimeException(e);
             }
         }
 
@@ -148,19 +143,6 @@ public final class HammeringRecipe implements Recipe<HammeringInventory> {
             builder.append(']');
 
             return builder.toString();
-        }
-
-        private static ItemStack readItemStack(JsonElement json) {
-            if (json.isJsonPrimitive())
-                return new ItemStack(
-                        Registry.ITEM.getOrEmpty(
-                                new Identifier(json.getAsString())
-                        ).orElseThrow(() -> new IllegalStateException("Item " + json.getAsString() + " does not exist"))
-                );
-            else if (!json.isJsonObject())
-                throw new JsonParseException("Invalid json input type for an item stack; must be a string or an object");
-            else
-                return ItemStack.fromTag((CompoundTag) Dynamic.convert(JsonOps.INSTANCE, NbtOps.INSTANCE, json));
         }
     }
 }

@@ -3,5 +3,7 @@
   "input": {
     "item": "c:palladium_ingot"
   },
-  "output": "c:palladium_plate"
+  "output": {
+    "item": "c:palladium_plate"
+  }
 }

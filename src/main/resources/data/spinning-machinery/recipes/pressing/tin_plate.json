@@ -3,5 +3,7 @@
   "input": {
     "item": "c:tin_ingot"
   },
-  "output": "c:tin_plate"
+  "output": {
+    "item": "c:tin_plate"
+  }
 }

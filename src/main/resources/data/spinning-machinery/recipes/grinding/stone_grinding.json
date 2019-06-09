@@ -1,5 +1,5 @@
 {
   "type": "spinning-machinery:grinding",
   "input": { "item": "minecraft:stone" },
-  "primary_output": "minecraft:cobblestone"
+  "primary_output": { "item": "minecraft:cobblestone" }
 }

@@ -2,23 +2,16 @@ package io.github.cottonmc.spinningmachinery.recipe;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.mojang.datafixers.Dynamic;
-import com.mojang.datafixers.types.JsonOps;
-import net.minecraft.datafixers.NbtOps;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.recipe.Ingredient;
-import net.minecraft.recipe.Recipe;
-import net.minecraft.recipe.RecipeSerializer;
-import net.minecraft.recipe.RecipeType;
+import net.minecraft.recipe.*;
 import net.minecraft.util.DefaultedList;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
 import net.minecraft.util.PacketByteBuf;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public final class PressingRecipe implements Recipe<Inventory> {
     private final Identifier id;
@@ -81,19 +74,25 @@ public final class PressingRecipe implements Recipe<Inventory> {
     }
 
     public static final class Serializer implements RecipeSerializer<PressingRecipe> {
+        private static final Logger LOGGER = LogManager.getLogger();
         @Override
         public PressingRecipe read(Identifier id, JsonObject obj) {
-            JsonElement ingredientJson =
-                    JsonHelper.hasArray(obj, "input")
-                            ? JsonHelper.getArray(obj, "input")
-                            : JsonHelper.getObject(obj, "input");
+            try {
+                JsonElement ingredientJson =
+                        JsonHelper.hasArray(obj, "input")
+                                ? JsonHelper.getArray(obj, "input")
+                                : JsonHelper.getObject(obj, "input");
 
-            return new PressingRecipe(
-                    id,
-                    JsonHelper.getString(obj, "group", ""),
-                    Ingredient.fromJson(ingredientJson),
-                    readItemStack(obj.get("output"))
-            );
+                return new PressingRecipe(
+                        id,
+                        JsonHelper.getString(obj, "group", ""),
+                        Ingredient.fromJson(ingredientJson),
+                        ShapedRecipe.getItemStack(obj.getAsJsonObject("output"))
+                );
+            } catch (Exception e) {
+                LOGGER.error("Failed to load pressing recipe " + id, e);
+                throw new RuntimeException(e);
+            }
         }
 
         @Override
@@ -111,19 +110,6 @@ public final class PressingRecipe implements Recipe<Inventory> {
             buf.writeString(recipe.group);
             recipe.input.write(buf);
             buf.writeItemStack(recipe.output);
-        }
-
-        private static ItemStack readItemStack(JsonElement json) {
-            if (json.isJsonPrimitive())
-                return new ItemStack(
-                        Registry.ITEM.getOrEmpty(
-                                new Identifier(json.getAsString())
-                        ).orElseThrow(() -> new IllegalStateException("Item " + json.getAsString() + " does not exist"))
-                );
-            else if (!json.isJsonObject())
-                throw new JsonParseException("Invalid json input type for an item stack; must be a string or an object");
-            else
-                return ItemStack.fromTag((CompoundTag) Dynamic.convert(JsonOps.INSTANCE, NbtOps.INSTANCE, json));
         }
     }
 }

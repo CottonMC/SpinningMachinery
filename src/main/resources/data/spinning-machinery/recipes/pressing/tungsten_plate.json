@@ -3,5 +3,7 @@
   "input": {
     "item": "c:tungsten_ingot"
   },
-  "output": "c:tungsten_plate"
+  "output": {
+    "item": "c:tungsten_plate"
+  }
 }

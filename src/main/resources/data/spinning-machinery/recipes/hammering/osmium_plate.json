@@ -2,7 +2,7 @@
   "type": "spinning-machinery:hammering",
   "input": "c:osmium_block",
   "output": {
-    "id": "c:osmium_plate",
-    "Count": 4
+    "item": "c:osmium_plate",
+    "count": 4
   }
 }

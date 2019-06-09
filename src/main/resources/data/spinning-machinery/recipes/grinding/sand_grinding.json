@@ -1,5 +1,5 @@
 {
   "type": "spinning-machinery:grinding",
   "input": { "item": "minecraft:gravel" },
-  "primary_output": "minecraft:sand"
+  "primary_output": { "item": "minecraft:sand" }
 }

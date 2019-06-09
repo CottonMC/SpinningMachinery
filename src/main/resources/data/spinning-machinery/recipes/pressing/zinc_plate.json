@@ -3,5 +3,7 @@
   "input": {
     "item": "c:zinc_ingot"
   },
-  "output": "c:zinc_plate"
+  "output": {
+    "item": "c:zinc_plate"
+  }
 }

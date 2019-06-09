@@ -2,7 +2,7 @@
   "type": "spinning-machinery:hammering",
   "input": "c:plutonium_block",
   "output": {
-    "id": "c:plutonium_plate",
-    "Count": 4
+    "item": "c:plutonium_plate",
+    "count": 4
   }
 }

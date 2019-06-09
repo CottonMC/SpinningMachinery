@@ -3,5 +3,7 @@
   "input": {
     "item": "c:electrum_ingot"
   },
-  "output": "c:electrum_plate"
+  "output": {
+    "item": "c:electrum_plate"
+  }
 }

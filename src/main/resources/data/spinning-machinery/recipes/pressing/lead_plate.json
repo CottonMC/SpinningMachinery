@@ -3,5 +3,7 @@
   "input": {
     "item": "c:lead_ingot"
   },
-  "output": "c:lead_plate"
+  "output": {
+    "item": "c:lead_plate"
+  }
 }

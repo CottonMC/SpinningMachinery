@@ -3,5 +3,7 @@
   "input": {
     "item": "c:iridium_ingot"
   },
-  "output": "c:iridium_plate"
+  "output": {
+    "item": "c:iridium_plate"
+  }
 }

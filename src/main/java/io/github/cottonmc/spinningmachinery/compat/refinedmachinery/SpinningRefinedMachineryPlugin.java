@@ -47,12 +47,12 @@ public final class SpinningRefinedMachineryPlugin {
                         result.addProperty("type", "spinning-machinery:grinding");
                         result.add("input", getIngredient(entry.getKey()));
                         result.add("primary_output", DataFixUtils.make(new JsonObject(), output -> {
-                            output.addProperty("id", Registry.ITEM.getId(recipe.getOutput().getItem()).toString());
-                            output.addProperty("Count", recipe.getOutputAmount());
+                            output.addProperty("item", Registry.ITEM.getId(recipe.getOutput().getItem()).toString());
+                            output.addProperty("count", recipe.getOutputAmount());
                         }));
                         result.add("bonus", DataFixUtils.make(new JsonObject(), output -> {
-                            output.addProperty("id", Registry.ITEM.getId(recipe.getRandomDrop().getItem()).toString());
-                            output.addProperty("Count", recipe.getRandomDropAmoumt());
+                            output.addProperty("item", Registry.ITEM.getId(recipe.getRandomDrop().getItem()).toString());
+                            output.addProperty("count", recipe.getRandomDropAmoumt());
                         }));
                         result.addProperty("bonus_chance", recipe.getPercentageDrop() / 100.0);
                         result.addProperty("source_mod", "Refined Machinery");

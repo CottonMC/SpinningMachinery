@@ -3,5 +3,7 @@
   "input": {
     "item": "c:titanium_ingot"
   },
-  "output": "c:titanium_plate"
+  "output": {
+    "item": "c:titanium_plate"
+  }
 }

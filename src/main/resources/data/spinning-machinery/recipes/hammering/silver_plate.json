@@ -2,7 +2,7 @@
   "type": "spinning-machinery:hammering",
   "input": "c:silver_block",
   "output": {
-    "id": "c:silver_plate",
-    "Count": 4
+    "item": "c:silver_plate",
+    "count": 4
   }
 }

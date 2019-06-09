@@ -3,5 +3,7 @@
   "input": {
     "item": "c:aluminum_ingot"
   },
-  "output": "c:aluminum_plate"
+  "output": {
+    "item": "c:aluminum_plate"
+  }
 }
