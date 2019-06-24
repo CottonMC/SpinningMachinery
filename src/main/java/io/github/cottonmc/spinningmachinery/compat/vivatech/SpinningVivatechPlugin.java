@@ -1,6 +1,7 @@
 package io.github.cottonmc.spinningmachinery.compat.vivatech;
 
 import io.github.cottonmc.spinningmachinery.SpinningMachineryPlugin;
+import io.github.cottonmc.spinningmachinery.recipe.GrindingInventory;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.recipe.Recipe;
@@ -18,5 +19,11 @@ public final class SpinningVivatechPlugin implements SpinningMachineryPlugin {
     @Nonnull
     public Collection<RecipeType<? extends Recipe<? super Inventory>>> getPressingRecipeTypes() {
         return ENABLED ? Collections.singleton(VivatechRecipes.PRESSING) : Collections.emptySet();
+    }
+
+    @Nonnull
+    @Override
+    public Collection<RecipeType<? extends Recipe<? super GrindingInventory>>> getGrindingRecipeTypes() {
+        return ENABLED ? Collections.singleton(VivatechRecipes.CRUSHING) : Collections.emptySet();
     }
 }

@@ -1,6 +1,5 @@
 package io.github.cottonmc.spinningmachinery.block.entity;
 
-import io.github.cottonmc.cotton.datapack.recipe.ProcessingRecipe;
 import io.github.cottonmc.cotton.gui.PropertyDelegateHolder;
 import io.github.cottonmc.spinningmachinery.block.AbstractMachineBlock;
 import io.github.cottonmc.spinningmachinery.block.SpinningBlocks;
@@ -19,12 +18,9 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.recipe.Recipe;
-import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.DefaultedList;
 import net.minecraft.util.ItemScatterer;
 import net.minecraft.util.math.Direction;
-import net.minecraft.world.loot.context.LootContext;
-import net.minecraft.world.loot.context.LootContextTypes;
 
 public final class GrinderBlockEntity extends AbstractProcessorBlockEntity<GrindingInventory>
         implements BlockEntityClientSerializable, SidedInventory, PropertyDelegateHolder, GrindingInventory {
@@ -150,7 +146,8 @@ public final class GrinderBlockEntity extends AbstractProcessorBlockEntity<Grind
 
     @Override
     protected void onCrafted(Recipe<? super GrindingInventory> recipe) {
-        if (recipe instanceof ProcessingRecipe && world instanceof ServerWorld) {
+        // TODO: Migrate some of this to the Vivatech plugin
+        /*if (recipe instanceof ProcessingRecipe && world instanceof ServerWorld) {
             ProcessingRecipe processingRecipe = (ProcessingRecipe) recipe;
             ServerWorld serverWorld = (ServerWorld) world;
             LootContext context = new LootContext.Builder(serverWorld)
@@ -160,6 +157,6 @@ public final class GrinderBlockEntity extends AbstractProcessorBlockEntity<Grind
             for (ItemStack bonus : processingRecipe.craftBonus(serverWorld.getServer().getLootManager(), context)) {
                 insertProcessingBonus(bonus);
             }
-        }
+        }*/
     }
 }

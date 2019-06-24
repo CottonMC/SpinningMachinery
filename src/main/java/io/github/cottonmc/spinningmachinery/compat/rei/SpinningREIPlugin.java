@@ -1,6 +1,5 @@
 package io.github.cottonmc.spinningmachinery.compat.rei;
 
-import io.github.cottonmc.cotton.datapack.recipe.CrushingRecipe;
 import io.github.cottonmc.spinningmachinery.SpinningMachinery;
 import io.github.cottonmc.spinningmachinery.recipe.GrindingRecipe;
 import io.github.cottonmc.spinningmachinery.recipe.HammeringRecipe;
@@ -37,9 +36,9 @@ public final class SpinningREIPlugin implements REIPluginEntry {
                 recipeHelper.registerDisplay(PRESSING, new PressingDisplay((PressingRecipe) recipe));
             } else if (recipe instanceof HammeringRecipe) {
                 recipeHelper.registerDisplay(HAMMERING, new HammeringDisplay((HammeringRecipe) recipe));
-            } else if (recipe instanceof CrushingRecipe) {
+            } /*else if (recipe instanceof CrushingRecipe) {
                 recipeHelper.registerDisplay(GRINDING, new CrushingDisplay((CrushingRecipe) recipe));
-            }
+            }*/ // TODO: Re-enable somehow?
         }
     }
 }

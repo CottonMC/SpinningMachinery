@@ -1,6 +1,6 @@
 package io.github.cottonmc.spinningmachinery.config;
 
-import io.github.cottonmc.repackage.blue.endless.jankson.Comment;
+import blue.endless.jankson.Comment;
 
 public final class MachineGuiConfig {
     //@Comment("If true, overrides the default screen settings for this machine")

@@ -86,6 +86,16 @@ dependencies {
      */
     val excludeOldFabric: ExternalModuleDependency.() -> Unit = { exclude(module = "fabric") }
 
+    /**
+     * Used for excluding Fabric API 0.3.0-pre.
+     */
+    val excludeFabricApi: ExternalModuleDependency.() -> Unit = { exclude(group = "net.fabricmc.fabric-api") }
+
+    val reallyJustExcludeIt: ExternalModuleDependency.() -> Unit = {
+        excludeOldFabric()
+        excludeFabricApi()
+    }
+
     minecraft("com.mojang:minecraft:$minecraft")
     mappings("net.fabricmc:yarn:" + v("minecraft") + '+' + v("mappings"))
 
@@ -94,21 +104,21 @@ dependencies {
     modImplementation("net.fabricmc.fabric-api:fabric-api:" + v("fabric-api"))
 
     // Required and bundled mods
-    modImplementation("com.jamieswhiteshirt:clothesline-fabric:" + v("clothesline"), excludeOldFabric)
-    modImplementation("io.github.cottonmc:cotton-resources:" + v("cotton-resources"), excludeOldFabric)
-    includedMod("io.github.cottonmc:cotton:" + v("cotton"), excludeOldFabric)
+    modImplementation("com.jamieswhiteshirt:clothesline-fabric:" + v("clothesline"), reallyJustExcludeIt)
+    modImplementation("io.github.cottonmc:cotton-resources:" + v("cotton-resources"), reallyJustExcludeIt)
+    includedMod("io.github.cottonmc:cotton:" + v("cotton"), reallyJustExcludeIt)
 
     // Mods with compat
-    modImplementation("me.shedaniel:RoughlyEnoughItems:" + v("rei"))
-    modImplementation("vivatech:vivatech:" + v("vivatech"))
-    modImplementation("refined-machinery:RefinedMachinery:" + v("refined-machinery"))
+    modImplementation("me.shedaniel:RoughlyEnoughItems:" + v("rei"), reallyJustExcludeIt)
+    modImplementation("vivatech:vivatech:" + v("vivatech"), reallyJustExcludeIt)
+    modImplementation("refined-machinery:RefinedMachinery:" + v("refined-machinery"), reallyJustExcludeIt)
 
     // Dev env mods
-    modRuntime("com.jamieswhiteshirt:developer-mode:" + v("developer-mode"))
-    modRuntime("io.github.cottonmc:cotton-energy:" + v("cotton-energy"), excludeOldFabric)
-    modRuntime("abused_master.abusedlib:AbusedLib:" + v("abusedlib"), excludeOldFabric)
-    modRuntime("com.github.NerdHubMC:Cardinal-Energy:" + v("cardinal-energy"), excludeOldFabric)
-    modRuntime("com.github.NerdHubMC:Cardinal-Components-API:" + v("cardinal-components-api"), excludeOldFabric)
+    modRuntime("com.jamieswhiteshirt:developer-mode:" + v("developer-mode"), reallyJustExcludeIt)
+    modRuntime("io.github.cottonmc:cotton-energy:" + v("cotton-energy"), reallyJustExcludeIt)
+    modRuntime("abused_master.abusedlib:AbusedLib:" + v("abusedlib"), reallyJustExcludeIt)
+    modRuntime("com.github.NerdHubMC:Cardinal-Energy:" + v("cardinal-energy"), reallyJustExcludeIt)
+    modRuntime("com.github.NerdHubMC:Cardinal-Components-API:" + v("cardinal-components-api"), reallyJustExcludeIt)
 
     // Other libraries
     compileOnly("com.google.code.findbugs:jsr305:3.0.2") { isTransitive = false }

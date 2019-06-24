@@ -1,0 +1,6 @@
+{
+  "parent": "spinning-machinery:block/primitive_grinder",
+  "textures": {
+    "front": "spinning-machinery:block/primitive_grinder_active"
+  }
+}

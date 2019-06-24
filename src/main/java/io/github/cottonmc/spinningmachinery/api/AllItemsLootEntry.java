@@ -9,6 +9,7 @@ import java.util.List;
  *
  * Implemented by default on {@code ItemEntry}, {@code TagEntry} and {@code CombinedEntry}.
  */
+// TODO: Doesn't belong in Spinning Machinery anymore
 public interface AllItemsLootEntry {
     List<ItemStack> spinning_getAllPossibleStacks();
 }

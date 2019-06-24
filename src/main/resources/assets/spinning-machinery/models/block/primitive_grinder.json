@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/orientable_with_bottom",
+  "textures": {
+    "top": "spinning-machinery:block/primitive_machine_casing_top",
+    "side": "spinning-machinery:block/primitive_machine_casing",
+    "bottom": "spinning-machinery:block/primitive_machine_casing",
+    "front": "spinning-machinery:block/primitive_grinder"
+  }
+}

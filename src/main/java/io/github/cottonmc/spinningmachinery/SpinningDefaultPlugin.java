@@ -16,7 +16,7 @@ public final class SpinningDefaultPlugin implements SpinningMachineryPlugin {
     @Override
     @Nonnull
     public Collection<RecipeType<? extends Recipe<? super GrindingInventory>>> getGrindingRecipeTypes() {
-        return ImmutableSet.of(SpinningRecipes.GRINDING, CottonRecipes.CRUSHING_RECIPE);
+        return ImmutableSet.of(SpinningRecipes.GRINDING);
     }
 
     @Override

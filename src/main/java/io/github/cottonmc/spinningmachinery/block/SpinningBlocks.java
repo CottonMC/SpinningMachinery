@@ -26,6 +26,17 @@ public final class SpinningBlocks {
             new Item.Settings().itemGroup(ItemGroup.DECORATIONS)
     );
 
+    public static final Block PRIMITIVE_GRINDER = register(
+            "primitive_grinder",
+            new GrinderBlock(
+                    FabricBlockSettings.copy(Blocks.IRON_BLOCK)
+                            .breakByTool(FabricToolTags.PICKAXES)
+                            .ticksRandomly()
+                            .build()
+            ),
+            new Item.Settings().itemGroup(ItemGroup.DECORATIONS)
+    );
+
     public static final Block PLATE_PRESS = register(
             "plate_press",
             new PlatePressBlock(
@@ -45,7 +56,7 @@ public final class SpinningBlocks {
     public static final BlockEntityType<GrinderBlockEntity> GRINDER_BLOCK_ENTITY = register(
             Registry.BLOCK_ENTITY,
             "grinder",
-            new BlockEntityType<>(GrinderBlockEntity::new, ImmutableSet.of(GRINDER), null)
+            new BlockEntityType<>(GrinderBlockEntity::new, ImmutableSet.of(GRINDER, PRIMITIVE_GRINDER), null)
     );
 
     public static final BlockEntityType<PlatePressBlockEntity> PLATE_PRESS_BLOCK_ENTITY = register(
