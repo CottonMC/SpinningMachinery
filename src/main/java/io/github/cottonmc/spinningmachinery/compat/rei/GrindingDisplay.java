@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-final class GrindingDisplay implements RecipeDisplay<GrindingRecipe>, AnyGrindingDisplay<GrindingRecipe> {
+final class GrindingDisplay implements RecipeDisplay<GrindingRecipe> {
     private final GrindingRecipe recipe;
     private final List<List<ItemStack>> input;
     private final List<ItemStack> output;
@@ -53,17 +53,17 @@ final class GrindingDisplay implements RecipeDisplay<GrindingRecipe>, AnyGrindin
     }
 
     @Nullable
-    @Override
+    //@Override
     public String getSourceMod() {
         return recipe.getSourceMod();
     }
 
-    @Override
+    //@Override
     public List<ItemStack> getBonusStacks() {
         return recipe.getBonus().map(Collections::singletonList).orElse(Collections.emptyList());
     }
 
-    @Override
+    //@Override
     public double getBonusChance() {
         return recipe.getBonusChance();
     }

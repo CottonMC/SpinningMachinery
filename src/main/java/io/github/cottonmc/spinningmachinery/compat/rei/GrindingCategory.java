@@ -23,7 +23,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.Supplier;
 
-final class GrindingCategory implements RecipeCategory<AnyGrindingDisplay<?>> {
+final class GrindingCategory implements RecipeCategory<GrindingDisplay> {
     @Override
     public Identifier getIdentifier() {
         return SpinningREIPlugin.GRINDING;
@@ -40,8 +40,8 @@ final class GrindingCategory implements RecipeCategory<AnyGrindingDisplay<?>> {
     }
 
     @Override
-    public List<Widget> setupDisplay(Supplier<AnyGrindingDisplay<?>> recipeDisplaySupplier, Rectangle bounds) {
-        AnyGrindingDisplay<?> display = recipeDisplaySupplier.get();
+    public List<Widget> setupDisplay(Supplier<GrindingDisplay> recipeDisplaySupplier, Rectangle bounds) {
+        GrindingDisplay display = recipeDisplaySupplier.get();
         int x = (int) bounds.getX();
         int y = (int) bounds.getCenterY() - 9;
 

@@ -1,7 +1,7 @@
 package io.github.cottonmc.spinningmachinery.util;
 
 public enum MachineTier {
-    PRIMITIVE("primitive", 0.5f),
+    PRIMITIVE("primitive", 0.66f),
     INDUSTRIAL("industrial", 1f);
 
     private final String id;

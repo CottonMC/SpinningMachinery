@@ -10,7 +10,7 @@ import net.minecraft.util.DefaultedList;
 
 public abstract class AbstractMachineBlockEntity extends LockableContainerBlockEntity {
     protected final DefaultedList<ItemStack> items;
-    
+
     protected AbstractMachineBlockEntity(BlockEntityType<?> type, DefaultedList<ItemStack> items) {
         super(type);
         this.items = items;

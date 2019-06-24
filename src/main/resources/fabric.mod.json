@@ -31,7 +31,5 @@
     "cotton": "*",
     "clothesline-fabric": "*",
     "cotton-resources": "*"
-  },
-
-  "mixins": ["mixins.spinning-machinery.json"]
+  }
 }
