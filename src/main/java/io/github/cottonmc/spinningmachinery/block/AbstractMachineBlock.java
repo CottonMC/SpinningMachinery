@@ -41,7 +41,7 @@ public abstract class AbstractMachineBlock extends BlockWithEntity {
 
     @Override
     public BlockState getPlacementState(ItemPlacementContext context) {
-        return FunctionUtils.runNullable(
+        return FunctionUtils.maybeApply(
                 super.getPlacementState(context),
                 state -> state.with(FACING, context.getPlayerHorizontalFacing().getOpposite())
         );

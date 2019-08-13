@@ -1,5 +1,7 @@
 package io.github.cottonmc.spinningmachinery.util;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.Objects;
 import java.util.function.Function;
 
@@ -14,7 +16,8 @@ public final class FunctionUtils {
      *
      * @return the result of {@code function.apply(value)} if the value is not null, otherwise null
      */
-    public static <T, R> R runNullable(T value, Function<T, R> function) {
+    @Nullable
+    public static <T, R> R maybeApply(@Nullable T value, @Nonnull Function<T, R> function) {
         if (value == null)
             return null;
         else
